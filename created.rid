@@ -1,0 +1,20 @@
+Fri, 24 Feb 2023 14:45:00 -0500
+CHANGELOG.md	Fri, 24 Feb 2023 10:53:23 -0500
+CODE_OF_CONDUCT.md	Thu, 02 Feb 2023 18:54:15 -0500
+LICENSE.txt	Thu, 02 Feb 2023 18:54:15 -0500
+README.md	Fri, 24 Feb 2023 11:02:06 -0500
+lib/anki_record/anki_package.rb	Fri, 24 Feb 2023 10:34:02 -0500
+lib/anki_record/card_template.rb	Fri, 24 Feb 2023 10:38:46 -0500
+lib/anki_record/collection.rb	Fri, 24 Feb 2023 10:38:47 -0500
+lib/anki_record/db/anki_schema_definition.rb	Sun, 12 Feb 2023 11:03:55 -0500
+lib/anki_record/db/clean_collection21_record.rb	Fri, 24 Feb 2023 10:23:46 -0500
+lib/anki_record/db/clean_collection2_record.rb	Fri, 24 Feb 2023 10:23:42 -0500
+lib/anki_record/deck.rb	Fri, 24 Feb 2023 10:38:47 -0500
+lib/anki_record/deck_options_group.rb	Fri, 24 Feb 2023 10:37:18 -0500
+lib/anki_record/helpers/shared_constants_helper.rb	Mon, 20 Feb 2023 08:49:29 -0500
+lib/anki_record/helpers/time_helper.rb	Sat, 18 Feb 2023 10:12:38 -0500
+lib/anki_record/note_field.rb	Fri, 24 Feb 2023 10:40:50 -0500
+lib/anki_record/note_type.rb	Fri, 24 Feb 2023 10:42:22 -0500
+lib/anki_record/version.rb	Fri, 24 Feb 2023 10:14:51 -0500
+lib/anki_record.rb	Fri, 24 Feb 2023 10:22:21 -0500
+pkg/anki_record-0.1.1.gem	Fri, 24 Feb 2023 11:08:27 -0500
