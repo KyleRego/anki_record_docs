@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module AnkiRecord::TimeHelper - AnkiRecord docs</title>
+<title>module AnkiRecord::ChecksumHelper - AnkiRecord docs</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -66,24 +66,23 @@
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    <li ><a href="#method-i-milliseconds_since_epoch">#milliseconds_since_epoch</a>
-    <li ><a href="#method-i-seconds_since_epoch">#seconds_since_epoch</a>
+    <li ><a href="#method-i-checksum">#checksum</a>
   </ul>
 </div>
 
   </div>
 </nav>
 
-<main role="main" aria-labelledby="module-AnkiRecord::TimeHelper">
-  <h1 id="module-AnkiRecord::TimeHelper" class="module">
-    module AnkiRecord::TimeHelper
+<main role="main" aria-labelledby="module-AnkiRecord::ChecksumHelper">
+  <h1 id="module-AnkiRecord::ChecksumHelper" class="module">
+    module AnkiRecord::ChecksumHelper
   </h1>
 
   <section class="description">
     
-<p>Helper module to calculate integer time values since the 1970 epoch</p>
+<p>A module for the method that calculates the checksum value of notes.</p>
 
-<p>Specifically, the time that has passed since 00:00:00 UTC Jan 1 1970</p>
+<p>This checksum is used by Anki to detect duplicates.</p>
 
   </section>
 
@@ -98,45 +97,22 @@
          <h3>Public Instance Methods</h3>
        </header>
 
-      <div id="method-i-milliseconds_since_epoch" class="method-detail ">
+      <div id="method-i-checksum" class="method-detail ">
         <div class="method-header">
           <div class="method-heading">
-            <span class="method-name">milliseconds_since_epoch</span><span
-              class="method-args">()</span>
+            <span class="method-name">checksum</span><span
+              class="method-args">(sfld)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
         </div>
 
         <div class="method-description">
-          <p>Return the number of milliseconds since the 1970 epoch</p>
+          <p>Compute the integer representation of the first 8 characters of the digest (calculated using the SHA-1 Secure Hash Algorithm) of the argument TODO: This needs to be expanded to strip HTML (except media) and more tests to ensure it calculates the same value as Anki does in that case</p>
 
-          <div class="method-source-code" id="milliseconds_since_epoch-source">
-            <pre><span class="ruby-comment"># File lib/anki_record/helpers/time_helper.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">milliseconds_since_epoch</span>
-  <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&quot;%Q&quot;</span>).<span class="ruby-identifier">to_i</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-        </div>
-
-
-      </div>
-
-      <div id="method-i-seconds_since_epoch" class="method-detail ">
-        <div class="method-header">
-          <div class="method-heading">
-            <span class="method-name">seconds_since_epoch</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-        </div>
-
-        <div class="method-description">
-          <p>Return the number of seconds since the 1970 epoch</p>
-
-          <div class="method-source-code" id="seconds_since_epoch-source">
-            <pre><span class="ruby-comment"># File lib/anki_record/helpers/time_helper.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seconds_since_epoch</span>
-  <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
+          <div class="method-source-code" id="checksum-source">
+            <pre><span class="ruby-comment"># File lib/anki_record/helpers/checksum_helper.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">checksum</span>(<span class="ruby-identifier">sfld</span>)
+  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">sfld</span>)[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">8</span>].<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>).<span class="ruby-identifier">to_s</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>README - AnkiRecord documentation</title>
+<title>README - AnkiRecord docs</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -72,7 +72,8 @@
               <summary>      <a href="#label-Development">Development</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Release+checklist">Release checklist</a>
+                          <li>      <a href="#label-Development+road+map-3A">Development road map:</a>
+          <li>      <a href="#label-Release+checklist">Release checklist</a>
 
               </ul>
             </details>
@@ -108,11 +109,9 @@
 
 <h1 id="label-AnkiRecord"><a href="AnkiRecord.html"><code>AnkiRecord</code></a><span><a href="#label-AnkiRecord">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p><a href="AnkiRecord.html"><code>AnkiRecord</code></a> provides an interface to Anki SQLite databases through the Ruby programming language.</p>
+<p><a href="AnkiRecord.html"><code>AnkiRecord</code></a> is a Ruby gem which provides a programmatic interface to creating and updating Anki flashcard deck files (<code>*.apkg</code> Anki SQLite databases). <strong>This gem is in an early stage of development–I do not recommend you use it yet.</strong></p>
 
-<p>Currently it can be used to create an empty Anki database file, execute raw SQL statements against it, and then zip the database into an *.apkg file which can be imported into Anki.</p>
-
-<p><a href="https://kylerego.github.io/anki_record_docs">Documentation</a></p>
+<p><a href="https://kylerego.github.io/anki_record_docs">API Documentation</a></p>
 
 <h2 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -126,14 +125,56 @@
 
 <h2 id="label-Usage">Usage<span><a href="#label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
+<p>The Anki package object is instantiated with <code>AnkiRecord::AnkiPackage.new</code> and if passed a block, will execute the block and zip the <code>*.apkg</code> file:</p>
+
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;anki_record&quot;</span>
 
-<span class="ruby-identifier">db</span> = <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">AnkiPackage</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">name:</span> <span class="ruby-string">&quot;test1&quot;</span>
-<span class="ruby-identifier">db</span>.<span class="ruby-identifier">execute</span> <span class="ruby-string">&quot;any valid SQL statement&quot;</span>
-<span class="ruby-identifier">db</span>.<span class="ruby-identifier">zip_and_close</span> <span class="ruby-comment"># creates test.apkg file in the current working directory</span>
+<span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">AnkiPackage</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">name:</span> <span class="ruby-string">&quot;test&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">apkg</span><span class="ruby-operator">|</span>
+  <span class="ruby-value">3</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">number</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{3 - number}...&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Countdown complete. Write any Ruby you want in here!&quot;</span>
+<span class="ruby-keyword">end</span>
 </pre>
 
-<p>The RSpec tests are written BDD-style as executable documentation; reading them might help to understand the gem (e.g. <a href="https://github.com/KyleRego/anki_record/blob/main/spec/anki_record/anki_package_spec.rb">anki_package_spec.rb</a>).</p>
+<p>If an exception is raised inside the block, the temporary <code>collection.anki2</code> and <code>collection.anki21</code> databases are deleted without creating a new <code>*.apkg</code> zip file, so this is the recommended way.</p>
+
+<p>Alternatively, if <code>AnkiRecord::Package::new</code> is not passed a block, the <code>zip</code> method must be explicitly called on the Anki package object:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;anki_record&quot;</span>
+
+<span class="ruby-identifier">apkg</span> = <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">AnkiPackage</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">name:</span> <span class="ruby-string">&quot;test&quot;</span>)
+<span class="ruby-identifier">apkg</span>.<span class="ruby-identifier">zip</span>
+</pre>
+
+<p>A new Anki package object is initialized with the “Default” deck and the default note types of a new Anki collection (including “Basic” and “Cloze”). The deck and note type objects can be accessed through the <code>collection</code> attribute of the Anki package object through the <code>find_deck_by</code> and <code>find_note_type_by</code> methods by passing the <code>name</code> keyword argument:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;anki_record&quot;</span>
+
+<span class="ruby-identifier">apkg</span> = <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">AnkiPackage</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">name:</span> <span class="ruby-string">&quot;test&quot;</span>
+
+<span class="ruby-identifier">deck</span> = <span class="ruby-identifier">apkg</span>.<span class="ruby-identifier">collection</span>.<span class="ruby-identifier">find_deck_by</span> <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Default&quot;</span>
+
+<span class="ruby-identifier">note_type</span> = <span class="ruby-identifier">apkg</span>.<span class="ruby-identifier">collection</span>.<span class="ruby-identifier">find_note_type_by</span> <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Basic&quot;</span>
+
+<span class="ruby-identifier">note</span> = <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Note</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">note_type:</span> <span class="ruby-identifier">note_type</span>, <span class="ruby-value">deck:</span> <span class="ruby-identifier">deck</span>
+<span class="ruby-identifier">note</span>.<span class="ruby-identifier">front</span> = <span class="ruby-string">&quot;Hello&quot;</span>
+<span class="ruby-identifier">note</span>.<span class="ruby-identifier">back</span> = <span class="ruby-string">&quot;World&quot;</span>
+<span class="ruby-identifier">note</span>.<span class="ruby-identifier">save</span>
+
+<span class="ruby-identifier">note_type2</span> = <span class="ruby-identifier">apkg</span>.<span class="ruby-identifier">collection</span>.<span class="ruby-identifier">find_note_type_by</span> <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Cloze&quot;</span>
+
+<span class="ruby-identifier">note2</span> = <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Note</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">note_type:</span> <span class="ruby-identifier">note_type2</span>, <span class="ruby-value">deck:</span> <span class="ruby-identifier">deck</span>
+<span class="ruby-identifier">note2</span>.<span class="ruby-identifier">text</span> = <span class="ruby-string">&quot;Cloze {{c1::Hello}}&quot;</span>
+<span class="ruby-identifier">note2</span>.<span class="ruby-identifier">back_extra</span> = <span class="ruby-string">&quot;World&quot;</span>
+<span class="ruby-identifier">note2</span>.<span class="ruby-identifier">save</span>
+
+<span class="ruby-identifier">apkg</span>.<span class="ruby-identifier">zip</span>
+</pre>
+
+<p>This example creates a <code>test.apkg</code> zip file in the current working directory, which when imported into Anki, will add one Basic note and one Cloze note.</p>
+
+<p>The RSpec examples are intended to provide executable documentation, and reading them may be helpful to understand the API (e.g. <a href="https://github.com/KyleRego/anki_record/blob/main/spec/anki_record/anki_package_spec.rb">anki_package_spec.rb</a>).</p>
 
 <h2 id="label-Development">Development<span><a href="#label-Development">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -141,13 +182,34 @@
 
 <p>To install this gem onto your local machine, run <code>bundle exec rake install</code>. To release a new version, update the version number in <code>version.rb</code>, and then run <code>bundle exec rake release</code>, which will create a git tag for the version, push git commits and the created tag, and push the <code>.gem</code> file to <a href="https://rubygems.org">rubygems.org</a>.</p>
 
+<h3 id="label-Development+road+map-3A">Development road map:<span><a href="#label-Development+road+map-3A">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Work on creating and updating notes and cards to the collection.anki21 database</p>
+</li><li>
+<p>Validation logic of what makes the note valid based on the note type’s card templates and fields</p>
+</li><li>
+<p>Work on adding media support</p>
+</li><li>
+<p>Checksum for notes needs to be updated</p>
+</li><li>
+<p>Work on updating and saving decks</p>
+</li><li>
+<p>Work on updating and saving deck options groups</p>
+</li><li>
+<p>Work on updating and saving note types including the note fields and card templates</p>
+</li></ul>
+
 <h3 id="label-Release+checklist">Release checklist<span><a href="#label-Release+checklist">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p>Bump version</p>
-</li><li>
 <p>Update changelog</p>
 </li><li>
-<p>Regenerate documentation</p>
+<p>Update usage examples</p>
+</li><li>
+<p>Update and regenerate documentation</p>
+</li><li>
+<p>Bump version</p>
+</li><li>
+<p>Release gem</p>
 </li></ul>
 <!-- ## Contributing
 
@@ -158,7 +220,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/KyleRe
 
 <h2 id="label-Code+of+Conduct">Code of Conduct<span><a href="#label-Code+of+Conduct">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>Everyone interacting in the <a href="AnkiRecord.html"><code>AnkiRecord</code></a> project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the <a href="https://github.com/KyleRegoanki_record/blob/main/CODE_OF_CONDUCT.md">code of conduct</a>.</p>
+<p>Everyone interacting in the <a href="AnkiRecord.html"><code>AnkiRecord</code></a> project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the <a href="https://github.com/KyleRego/anki_record/blob/main/CODE_OF_CONDUCT.md">code of conduct</a>.</p>
 
 </main>
 

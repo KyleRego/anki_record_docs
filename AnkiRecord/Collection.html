@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class AnkiRecord::Collection - AnkiRecord documentation</title>
+<title>class AnkiRecord::Collection - AnkiRecord docs</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -81,6 +81,8 @@
 
   <ul class="link-list" role="directory">
     <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-find_deck_by">#find_deck_by</a>
+    <li ><a href="#method-i-find_note_type_by">#find_note_type_by</a>
   </ul>
 </div>
 
@@ -107,6 +109,38 @@
         <h3>Attributes</h3>
       </header>
 
+      <div id="attribute-i-anki_package" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">anki_package</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The instance of <a href="AnkiPackage.html"><code>AnkiRecord::AnkiPackage</code></a> that this collection object belongs to</p>
+        </div>
+      </div>
+      <div id="attribute-i-creation_timestamp" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">creation_timestamp</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The time in milliseconds that the col record was created since the 1970 epoch</p>
+        </div>
+      </div>
+      <div id="attribute-i-deck_options_groups" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">deck_options_groups</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>An array of the collection’s deck options group objects, which are instances of <a href="DeckOptionsGroup.html"><code>AnkiRecord::DeckOptionsGroup</code></a></p>
+
+<p>These represent groups of settings that can be applied to a deck.</p>
+        </div>
+      </div>
       <div id="attribute-i-decks" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">decks</span><span
@@ -114,7 +148,29 @@
         </div>
 
         <div class="method-description">
-        <p>An array of the collection’s deck objects</p>
+        <p>An array of the collection’s deck objects, which are instances of <a href="Deck.html"><code>AnkiRecord::Deck</code></a></p>
+        </div>
+      </div>
+      <div id="attribute-i-id" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">id</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The id attribute will become, or is the same as, the primary key id of this record in the database</p>
+
+<p>Since there should be only one col record, this attribute should be 1</p>
+        </div>
+      </div>
+      <div id="attribute-i-last_modified_time" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">last_modified_time</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The last time that the col record was modified in milliseconds since the 1970 epoch</p>
         </div>
       </div>
       <div id="attribute-i-note_types" class="method-detail">
@@ -124,7 +180,7 @@
         </div>
 
         <div class="method-description">
-        <p>An array of the collection’s note type objects</p>
+        <p>An array of the collection’s note type objects, which are instances of <a href="NoteType.html"><code>AnkiRecord::NoteType</code></a></p>
         </div>
       </div>
     </section>
@@ -147,10 +203,67 @@
         <div class="method-description">
           <p>Instantiates the collection object for the <code>anki_package</code></p>
 
+<p>The collection object represents the single record of the collection.anki21 database col table.</p>
+
+<p>This record stores the note types used by the notes and the decks that they belong to.</p>
+
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/anki_record/collection.rb, line 27</span>
+            <pre><span class="ruby-comment"># File lib/anki_record/collection.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">anki_package:</span>)
   <span class="ruby-identifier">setup_collection_instance_variables</span>(<span class="ruby-value">anki_package:</span> <span class="ruby-identifier">anki_package</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-find_deck_by" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">find_deck_by</span><span
+              class="method-args">(name: nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Find one of the collection’s decks by name</p>
+
+          <div class="method-source-code" id="find_deck_by-source">
+            <pre><span class="ruby-comment"># File lib/anki_record/collection.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_deck_by</span>(<span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">decks</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">deck</span><span class="ruby-operator">|</span> <span class="ruby-identifier">deck</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-find_note_type_by" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">find_note_type_by</span><span
+              class="method-args">(name: nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Find one of the collection’s note types by name</p>
+
+          <div class="method-source-code" id="find_note_type_by-source">
+            <pre><span class="ruby-comment"># File lib/anki_record/collection.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_note_type_by</span>(<span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">note_types</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">note_type</span><span class="ruby-operator">|</span> <span class="ruby-identifier">note_type</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

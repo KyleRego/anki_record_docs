@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class AnkiRecord::NoteField - AnkiRecord documentation</title>
+<title>class AnkiRecord::NoteField - AnkiRecord docs</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -106,7 +106,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is readable and writeable but needs to be documented</p>
+        <p>The description of the note field</p>
         </div>
       </div>
       <div id="attribute-i-font_size" class="method-detail">
@@ -116,7 +116,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is readable and writeable but needs to be documented</p>
+        <p>The font size used when editing the note field</p>
         </div>
       </div>
       <div id="attribute-i-font_style" class="method-detail">
@@ -126,7 +126,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is readable and writeable but needs to be documented</p>
+        <p>The font style used when editing the note field</p>
         </div>
       </div>
       <div id="attribute-i-name" class="method-detail">
@@ -146,7 +146,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is currently read-only and needs to be documented.</p>
+        <p>The note type that the note field belongs to</p>
         </div>
       </div>
       <div id="attribute-i-ordinal_number" class="method-detail">
@@ -156,7 +156,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is currently read-only and needs to be documented.</p>
+        <p>0 for the first field of the note type, 1 for the second, etc.</p>
         </div>
       </div>
       <div id="attribute-i-right_to_left" class="method-detail">
@@ -166,7 +166,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is readable and writeable but needs to be documented</p>
+        <p>A boolean that indicates if this field should be right to left</p>
         </div>
       </div>
       <div id="attribute-i-sticky" class="method-detail">
@@ -176,7 +176,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is readable and writeable but needs to be documented</p>
+        <p>A boolean that indicates if this field is sticky when adding cards of the note type in Anki</p>
         </div>
       </div>
     </section>
@@ -200,7 +200,7 @@
           <p>Instantiates a new field for the given note type</p>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/anki_record/note_field.rb, line 31</span>
+            <pre><span class="ruby-comment"># File lib/anki_record/note_field.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">note_type:</span>, <span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">args:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">name</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">args</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>[<span class="ruby-string">&quot;name&quot;</span>])
 

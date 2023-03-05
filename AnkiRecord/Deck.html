@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class AnkiRecord::Deck - AnkiRecord documentation</title>
+<title>class AnkiRecord::Deck - AnkiRecord docs</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -115,7 +115,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is currently read-only and needs to be documented.</p>
+        <p>The collection object that the deck belongs to</p>
         </div>
       </div>
       <div id="attribute-i-deck_options_group_id" class="method-detail">
@@ -125,7 +125,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is currently read-only and needs to be documented.</p>
+        <p>The id of the eck options/settings group that is applied to the deck</p>
         </div>
       </div>
       <div id="attribute-i-description" class="method-detail">
@@ -145,7 +145,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is currently read-only and needs to be documented.</p>
+        <p>The id of the deck</p>
         </div>
       </div>
       <div id="attribute-i-last_modified_time" class="method-detail">
@@ -155,7 +155,9 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is currently read-only and needs to be documented.</p>
+        <p>The last time the deck was modified in number of seconds since the epoch</p>
+
+<p>TODO: is this really supposed to be seconds? Should it be milliseconds?</p>
         </div>
       </div>
       <div id="attribute-i-name" class="method-detail">
@@ -186,10 +188,10 @@
         </div>
 
         <div class="method-description">
-          <p>Instantiate a new <a href="Deck.html"><code>Deck</code></a></p>
+          <p>Instantiates a new <a href="Deck.html"><code>Deck</code></a> object</p>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/anki_record/deck.rb, line 36</span>
+            <pre><span class="ruby-comment"># File lib/anki_record/deck.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">collection:</span>, <span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">args:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">name</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">args</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>[<span class="ruby-string">&quot;name&quot;</span>])
 

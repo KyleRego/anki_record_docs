@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class AnkiRecord::NoteType - AnkiRecord documentation</title>
+<title>class AnkiRecord::NoteType - AnkiRecord docs</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -82,8 +82,15 @@
 
   <ul class="link-list" role="directory">
     <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-allowed_card_template_answer_format_field_names">#allowed_card_template_answer_format_field_names</a>
+    <li ><a href="#method-i-allowed_card_template_question_format_field_names">#allowed_card_template_question_format_field_names</a>
+    <li ><a href="#method-i-field_names_in_order">#field_names_in_order</a>
+    <li ><a href="#method-i-find_card_template_by">#find_card_template_by</a>
     <li ><a href="#method-i-new_card_template">#new_card_template</a>
     <li ><a href="#method-i-new_note_field">#new_note_field</a>
+    <li ><a href="#method-i-snake_case_field_names">#snake_case_field_names</a>
+    <li ><a href="#method-i-snake_case_sort_field_name">#snake_case_sort_field_name</a>
+    <li ><a href="#method-i-sort_field_name">#sort_field_name</a>
   </ul>
 </div>
 
@@ -110,6 +117,16 @@
         <h3>Attributes</h3>
       </header>
 
+      <div id="attribute-i-card_templates" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">card_templates</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>An array of the card template objects belonging to the note type</p>
+        </div>
+      </div>
       <div id="attribute-i-cloze" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">cloze</span><span
@@ -117,17 +134,27 @@
         </div>
 
         <div class="method-description">
-        <p>true if the note type is a cloze note type and false if it is not</p>
+        <p>A boolean that indicates if this note type is a cloze-deletion note type</p>
+        </div>
+      </div>
+      <div id="attribute-i-collection" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">collection</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The collection object that the note type belongs to</p>
         </div>
       </div>
       <div id="attribute-i-css" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">css</span><span
-            class="attribute-access-type">[RW]</span>
+            class="attribute-access-type">[R]</span>
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is readable and writeable but needs to be documented</p>
+        <p>The CSS styling of the note type</p>
         </div>
       </div>
       <div id="attribute-i-deck_id" class="method-detail">
@@ -137,7 +164,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is currently read-only and needs to be documented.</p>
+        <p>TODO: Investigate the meaning of the deck id of a note type</p>
         </div>
       </div>
       <div id="attribute-i-fields" class="method-detail">
@@ -147,7 +174,7 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is currently read-only and needs to be documented.</p>
+        <p>An array of the field names of the card template</p>
         </div>
       </div>
       <div id="attribute-i-id" class="method-detail">
@@ -157,37 +184,39 @@
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is currently read-only and needs to be documented.</p>
+        <p>The id of the note type</p>
         </div>
       </div>
       <div id="attribute-i-latex_postamble" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">latex_postamble</span><span
-            class="attribute-access-type">[RW]</span>
+            class="attribute-access-type">[R]</span>
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is readable and writeable but needs to be documented</p>
+        <p>The LaTeX postamble of the note type</p>
         </div>
       </div>
       <div id="attribute-i-latex_preamble" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">latex_preamble</span><span
-            class="attribute-access-type">[RW]</span>
+            class="attribute-access-type">[R]</span>
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is readable and writeable but needs to be documented</p>
+        <p>The LaTeX preamble of the note type</p>
         </div>
       </div>
       <div id="attribute-i-latex_svg" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">latex_svg</span><span
-            class="attribute-access-type">[RW]</span>
+            class="attribute-access-type">[R]</span>
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is readable and writeable but needs to be documented</p>
+        <p>A boolean probably related to something with LaTeX and SVG.</p>
+
+<p>TODO: Investigate what this does</p>
         </div>
       </div>
       <div id="attribute-i-name" class="method-detail">
@@ -197,17 +226,17 @@
         </div>
 
         <div class="method-description">
-        <p>The name of this note type</p>
+        <p>The name of the note type</p>
         </div>
       </div>
-      <div id="attribute-i-templates" class="method-detail">
+      <div id="attribute-i-tags" class="method-detail">
         <div class="method-heading attribute-method-heading">
-          <span class="method-name">templates</span><span
+          <span class="method-name">tags</span><span
             class="attribute-access-type">[R]</span>
         </div>
 
         <div class="method-description">
-        <p>One of many attributes that is currently read-only and needs to be documented.</p>
+        <p>TODO: Investigate the meaning of tags of a note type</p>
         </div>
       </div>
     </section>
@@ -231,7 +260,7 @@
           <p>Instantiates a new note type</p>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 39</span>
+            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">collection:</span>, <span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">cloze:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">args:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">name</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">args</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>[<span class="ruby-string">&quot;name&quot;</span>])
 
@@ -240,9 +269,7 @@
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>
     <span class="ruby-identifier">setup_note_type_instance_variables_from_existing</span>(<span class="ruby-value">args:</span> <span class="ruby-identifier">args</span>)
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">setup_note_type_instance_variables</span>(
-      <span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>, <span class="ruby-value">cloze:</span> <span class="ruby-identifier">cloze</span>
-    )
+    <span class="ruby-identifier">setup_note_type_instance_variables</span>(<span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>, <span class="ruby-value">cloze:</span> <span class="ruby-identifier">cloze</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -257,6 +284,107 @@
        <header>
          <h3>Public Instance Methods</h3>
        </header>
+
+      <div id="method-i-allowed_card_template_answer_format_field_names" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">allowed_card_template_answer_format_field_names</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The allowed field_name values in {{field_name}} of the note type’s card templates’ answer format</p>
+
+<p>These are the note type’s fields’ names, and if the note type is a cloze type, these also include the note type’s fields’ names prepended with ‘cloze:’.</p>
+
+<p>TODO: research if other special field names like e.g. ‘FrontSide’ are allowed</p>
+
+          <div class="method-source-code" id="allowed_card_template_answer_format_field_names-source">
+            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">allowed_card_template_answer_format_field_names</span>
+  <span class="ruby-identifier">allowed_card_template_question_format_field_names</span> <span class="ruby-operator">+</span> [<span class="ruby-string">&quot;FrontSide&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-allowed_card_template_question_format_field_names" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">allowed_card_template_question_format_field_names</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The allowed field_name values in {{field_name}} of the note type’s card templates’ question format</p>
+
+<p>These are the note type’s fields’ names, and if the note type is a cloze type, these also include the note type’s fields’ names prepended with ‘cloze:’.</p>
+
+<p>TODO: research if other special field names like e.g. ‘FrontSide’ are allowed</p>
+
+          <div class="method-source-code" id="allowed_card_template_question_format_field_names-source">
+            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">allowed_card_template_question_format_field_names</span>
+  <span class="ruby-identifier">allowed</span> = <span class="ruby-identifier">field_names_in_order</span>
+  <span class="ruby-identifier">cloze</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">allowed</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">field_names_in_order</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">field_name</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;cloze:#{field_name}&quot;</span> } <span class="ruby-operator">:</span> <span class="ruby-identifier">allowed</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-field_names_in_order" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">field_names_in_order</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The field names of the note type ordered by their ordinal values</p>
+
+          <div class="method-source-code" id="field_names_in_order-source">
+            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_names_in_order</span>
+  <span class="ruby-ivar">@fields</span>.<span class="ruby-identifier">sort_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:ordinal_number</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-find_card_template_by" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">find_card_template_by</span><span
+              class="method-args">(name:)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Find one of the note type’s card templates by name</p>
+
+          <div class="method-source-code" id="find_card_template_by-source">
+            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_card_template_by</span>(<span class="ruby-value">name:</span>)
+  <span class="ruby-identifier">card_templates</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">template</span><span class="ruby-operator">|</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
 
       <div id="method-i-new_card_template" class="method-detail ">
         <div class="method-header">
@@ -273,10 +401,12 @@
 <p>The card template is an instance of <a href="CardTemplate.html"><code>AnkiRecord::CardTemplate</code></a></p>
 
           <div class="method-source-code" id="new_card_template-source">
-            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 66</span>
+            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new_card_template</span>(<span class="ruby-value">name:</span>)
-  <span class="ruby-comment"># TODO: Check if name already used by a template in this note type</span>
-  <span class="ruby-ivar">@templates</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">CardTemplate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">note_type:</span> <span class="ruby-keyword">self</span>, <span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>)
+  <span class="ruby-comment"># TODO: Raise an exception if the name is already used by a template in this note type</span>
+  <span class="ruby-identifier">card_template</span> = <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">CardTemplate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">note_type:</span> <span class="ruby-keyword">self</span>, <span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>)
+  <span class="ruby-ivar">@card_templates</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">card_template</span>
+  <span class="ruby-identifier">card_template</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -294,15 +424,88 @@
         </div>
 
         <div class="method-description">
-          <p>Create a new field and adds it to this note type’s fields</p>
+          <p>Creates a new field and adds it to this note type’s fields</p>
 
 <p>The field is an instance of <a href="NoteField.html"><code>AnkiRecord::NoteField</code></a></p>
 
           <div class="method-source-code" id="new_note_field-source">
-            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 57</span>
+            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new_note_field</span>(<span class="ruby-value">name:</span>)
-  <span class="ruby-comment"># TODO: Check if name already used by a field in this note type</span>
-  <span class="ruby-ivar">@fields</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">NoteField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">note_type:</span> <span class="ruby-keyword">self</span>, <span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>)
+  <span class="ruby-comment"># TODO: Raise an exception if the name is already used by a field in this note type</span>
+  <span class="ruby-identifier">note_field</span> = <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">NoteField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">note_type:</span> <span class="ruby-keyword">self</span>, <span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>)
+  <span class="ruby-ivar">@fields</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">note_field</span>
+  <span class="ruby-identifier">note_field</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-snake_case_field_names" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">snake_case_field_names</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The allowed field names of the note in snake_case</p>
+
+<p>TODO: make this more robust… what happens when the note type name has non-alphabetic characters?</p>
+
+          <div class="method-source-code" id="snake_case_field_names-source">
+            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">snake_case_field_names</span>
+  <span class="ruby-identifier">field_names_in_order</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">field_name</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field_name</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot; &quot;</span>, <span class="ruby-string">&quot;_&quot;</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-snake_case_sort_field_name" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">snake_case_sort_field_name</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The name of the sort field in snake_case</p>
+
+          <div class="method-source-code" id="snake_case_sort_field_name-source">
+            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">snake_case_sort_field_name</span>
+  <span class="ruby-identifier">sort_field_name</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot; &quot;</span>, <span class="ruby-string">&quot;_&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-sort_field_name" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">sort_field_name</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The name of the field used to sort notes of the note type in the Anki browser</p>
+
+          <div class="method-source-code" id="sort_field_name-source">
+            <pre><span class="ruby-comment"># File lib/anki_record/note_type.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sort_field_name</span>
+  <span class="ruby-ivar">@fields</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">ordinal_number</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@sort_field</span> }&amp;.<span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

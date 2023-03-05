@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>CHANGELOG - AnkiRecord documentation</title>
+<title>CHANGELOG - AnkiRecord docs</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -63,6 +63,7 @@
               <li>      <a href="#label-5BDevelopment+started-5D+-+02-02-2023">[Development started] - 02-02-2023</a>
           <li>      <a href="#label-5BUnreleased-2F0.1.0-5D+-+02-22-2023">[Unreleased/0.1.0] - 02-22-2023</a>
           <li>      <a href="#label-5B0.1.1-5D+-+02-24-2023">[0.1.1] - 02-24-2023</a>
+          <li>      <a href="#label-5B0.2.0-5D+-+03-05-2023">[0.2.0] - 03-05-2023</a>
 
   </ul>
 </div>
@@ -90,12 +91,23 @@
 
 <h2 id="label-5BUnreleased-2F0.1.0-5D+-+02-22-2023">[Unreleased/0.1.0] - 02-22-2023<span><a href="#label-5BUnreleased-2F0.1.0-5D+-+02-22-2023">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
-<p>First version that can be used to create a complete *.apkg file that imports into Anki</p>
+<p>The gem can be used to create an *.apkg zip file that successfully imports into Anki.</p>
+</li><li>
+<p>Raw SQL statements can be executed against the temporary database before it is zipped.</p>
 </li></ul>
 
 <h2 id="label-5B0.1.1-5D+-+02-24-2023">[0.1.1] - 02-24-2023<span><a href="#label-5B0.1.1-5D+-+02-24-2023">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
-<p>Updated documentation</p>
+<p>Updated documentation to release the first version</p>
+</li></ul>
+
+<h2 id="label-5B0.2.0-5D+-+03-05-2023">[0.2.0] - 03-05-2023<span><a href="#label-5B0.2.0-5D+-+03-05-2023">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><code>AnkiPackage#zip_and_close</code> is changed to <code>AnkiPackage#zip</code></p>
+</li><li>
+<p>Decks and note types can be accessed through the collection object</p>
+</li><li>
+<p>Notes can be created, updated, and saved to the database and this also populates the corresponding records in the <code>cards</code> table</p>
 </li></ul>
 
 </main>
