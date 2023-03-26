@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AnkiRecord::NoteType</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/panel.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/turbolinks.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/search_index.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/searcher.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../panel/tree.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/searchdoc.js" type="text/javascript" charset="utf-8"></script>
+<meta name="data-rel-prefix" content="../../">
+<meta name="data-tree-keys" content='["AnkiRecord", "NoteType"]'>
+
+
+    <meta property="og:title" value="AnkiRecord::NoteType">
+
+  
+    
+    <meta name="description" content="NoteType represents an Anki note type (also called a model).  The attributes are documented in the NoteTypeAttributes module.">
+    <meta property="og:description" content="NoteType represents an Anki note type (also called a model).  The attributes are documented in the NoteTypeAttributes module.">
+  
+
+    <meta name="keywords" content="AnkiRecord::NoteType class, new, save, find_card_template_by, field_names_in_order, sort_field_name, allowed_card_template_question_format_field_names, allowed_card_template_answer_format_field_names">
+</head>
+
+<body>
+    <a class="sr-only sr-only-focusable" href="#content" data-turbolinks="false">Skip to Content</a>
+    <a class="sr-only sr-only-focusable" href="#search" data-turbolinks="false">Skip to Search</a>
+
+    <input type="checkbox" id="hamburger" class="panel_checkbox">
+<label class="panel_mobile_button" for="hamburger"><span></span> Menu</label>
+<nav class="panel panel_tree" id="panel" data-turbolinks-permanent>
+  <div class="header">
+    <input type="text" placeholder="Search (/) for a class, method, ..." autosave="searchdoc" results="10" id="search" autocomplete="off" tabindex="-1" />
+    <label class="panel_mobile_button_close" for="hamburger"><span></span> Close</label>
+  </div>
+  <div class="tree">
+    <ul>
+    </ul>
+  </div>
+  <div class="result">
+    <ul>
+    </ul>
+  </div>
+  <a href="links.html" id="links">index</a>
+</nav>
+
+
+    <div class="banner">
+        
+        <h2>
+            <span class="type">Class</span>
+            AnkiRecord::NoteType
+            
+                <span class="parent">&lt;
+                    
+                    Object
+                    
+                </span>
+            
+        </h2>
+        <ul class="files">
+            
+            <li><a href="../../files/lib/anki_record/note_type/note_type_rb.html">lib/anki_record/note_type/note_type.rb</a></li>
+            
+        </ul>
+        
+    </div>
+
+    <main id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="NoteType.html"><code>NoteType</code></a> represents an Anki note type (also called a model).</p>
+
+<p>The attributes are documented in the <a href="NoteTypeAttributes.html"><code>NoteTypeAttributes</code></a> module.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-allowed_card_template_answer_format_field_names">allowed_card_template_answer_format_field_names</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-allowed_card_template_question_format_field_names">allowed_card_template_question_format_field_names</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-field_names_in_order">field_names_in_order</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_card_template_by">find_card_template_by</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-save">save</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-sort_field_name">sort_field_name</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="TimeHelper.html">
+              AnkiRecord::TimeHelper
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="NoteTypeAttributes.html">
+              AnkiRecord::NoteTypeAttributes
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <h2 class="sectiontitle">Constants</h2>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">NOTE_TYPES_WITHOUT_TAGS_AND_VERS_VALUES</td>
+            <td>=</td>
+            <td class="attr-value">[&quot;Basic&quot;, &quot;Basic (and reversed card)&quot;,
+&quot;Basic (optional reversed card)&quot;, &quot;Basic (type in the answer)&quot;].freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <h2 class="sectiontitle">Class Public methods</h2>
+      
+        <div class="method">
+          <h3 class="title method-title" id="method-c-new">
+            
+              <b>new</b>(collection:, name: nil, args: nil)
+            
+            <a href="../../classes/AnkiRecord/NoteType.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">collection:</span>, <span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">args:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">name</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">args</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>[<span class="ruby-string">&quot;name&quot;</span>])
+
+  <span class="ruby-ivar">@collection</span> = <span class="ruby-identifier">collection</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>
+    <span class="ruby-identifier">setup_note_type_instance_variables_from_existing</span>(<span class="ruby-value">args:</span> <span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">setup_instance_variables_for_new_note_type</span>(<span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@collection</span>.<span class="ruby-identifier">add_note_type</span> <span class="ruby-keyword">self</span>
+  <span class="ruby-identifier">save</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+      <h2 class="sectiontitle">Instance Public methods</h2>
+      
+        <div class="method">
+          <h3 class="title method-title" id="method-i-allowed_card_template_answer_format_field_names">
+            
+              <b>allowed_card_template_answer_format_field_names</b>()
+            
+            <a href="../../classes/AnkiRecord/NoteType.html#method-i-allowed_card_template_answer_format_field_names" name="method-i-allowed_card_template_answer_format_field_names" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns allowed field_name values in {{field_name}} in the answer format.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-allowed_card_template_answer_format_field_names_source')" id="l_method-i-allowed_card_template_answer_format_field_names_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-allowed_card_template_answer_format_field_names_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">allowed_card_template_answer_format_field_names</span>
+  <span class="ruby-identifier">allowed_card_template_question_format_field_names</span> <span class="ruby-operator">+</span> [<span class="ruby-string">&quot;FrontSide&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-allowed_card_template_question_format_field_names">
+            
+              <b>allowed_card_template_question_format_field_names</b>()
+            
+            <a href="../../classes/AnkiRecord/NoteType.html#method-i-allowed_card_template_question_format_field_names" name="method-i-allowed_card_template_question_format_field_names" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns allowed field_name values in {{field_name}} in the question format.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-allowed_card_template_question_format_field_names_source')" id="l_method-i-allowed_card_template_question_format_field_names_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-allowed_card_template_question_format_field_names_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">allowed_card_template_question_format_field_names</span>
+  <span class="ruby-identifier">allowed</span> = <span class="ruby-identifier">field_names_in_order</span>
+  <span class="ruby-identifier">cloze</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">allowed</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">field_names_in_order</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">field_name</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;cloze:#{field_name}&quot;</span> } <span class="ruby-operator">:</span> <span class="ruby-identifier">allowed</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-field_names_in_order">
+            
+              <b>field_names_in_order</b>()
+            
+            <a href="../../classes/AnkiRecord/NoteType.html#method-i-field_names_in_order" name="method-i-field_names_in_order" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns an array of the note type’s fields’ names ordered by field ordinal values.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-field_names_in_order_source')" id="l_method-i-field_names_in_order_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-field_names_in_order_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_names_in_order</span>
+  <span class="ruby-ivar">@note_fields</span>.<span class="ruby-identifier">sort_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:ordinal_number</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-find_card_template_by">
+            
+              <b>find_card_template_by</b>(name:)
+            
+            <a href="../../classes/AnkiRecord/NoteType.html#method-i-find_card_template_by" name="method-i-find_card_template_by" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns the note type object’s card template with name <code>name</code> or nil if it is not found</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-find_card_template_by_source')" id="l_method-i-find_card_template_by_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-find_card_template_by_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_card_template_by</span>(<span class="ruby-value">name:</span>)
+  <span class="ruby-identifier">card_templates</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">template</span><span class="ruby-operator">|</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-save">
+            
+              <b>save</b>()
+            
+            <a href="../../classes/AnkiRecord/NoteType.html#method-i-save" name="method-i-save" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Saves the note type to the collection.anki21 database</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-save_source')" id="l_method-i-save_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-save_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>
+  <span class="ruby-identifier">collection_models_hash</span> = <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">models_json</span>
+  <span class="ruby-identifier">collection_models_hash</span>[<span class="ruby-ivar">@id</span>] = <span class="ruby-identifier">to_h</span>
+  <span class="ruby-identifier">sql</span> = <span class="ruby-string">&quot;update col set models = ? where id = ?&quot;</span>
+  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">anki_package</span>.<span class="ruby-identifier">prepare</span>(<span class="ruby-identifier">sql</span>).<span class="ruby-identifier">execute</span>([<span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-identifier">collection_models_hash</span>), <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">id</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-sort_field_name">
+            
+              <b>sort_field_name</b>()
+            
+            <a href="../../classes/AnkiRecord/NoteType.html#method-i-sort_field_name" name="method-i-sort_field_name" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns the name of the note type’s field used to sort notes in the browser.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-sort_field_name_source')" id="l_method-i-sort_field_name_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-sort_field_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sort_field_name</span>
+  <span class="ruby-ivar">@note_fields</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">ordinal_number</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@sort_field</span> }&amp;.<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </main>
+  </body>
+</html>

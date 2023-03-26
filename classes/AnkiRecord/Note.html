@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AnkiRecord::Note</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/panel.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/turbolinks.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/search_index.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/searcher.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../panel/tree.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/searchdoc.js" type="text/javascript" charset="utf-8"></script>
+<meta name="data-rel-prefix" content="../../">
+<meta name="data-tree-keys" content='["AnkiRecord", "Note"]'>
+
+
+    <meta property="og:title" value="AnkiRecord::Note">
+
+  
+    
+    <meta name="description" content="Represents an Anki note. The note object corresponds to a record in the ‘notes` table in the collection.anki21 database.">
+    <meta property="og:description" content="Represents an Anki note. The note object corresponds to a record in the ‘notes` table in the collection.anki21 database.">
+  
+
+    <meta name="keywords" content="AnkiRecord::Note class, new, save, method_missing, respond_to_missing?">
+</head>
+
+<body>
+    <a class="sr-only sr-only-focusable" href="#content" data-turbolinks="false">Skip to Content</a>
+    <a class="sr-only sr-only-focusable" href="#search" data-turbolinks="false">Skip to Search</a>
+
+    <input type="checkbox" id="hamburger" class="panel_checkbox">
+<label class="panel_mobile_button" for="hamburger"><span></span> Menu</label>
+<nav class="panel panel_tree" id="panel" data-turbolinks-permanent>
+  <div class="header">
+    <input type="text" placeholder="Search (/) for a class, method, ..." autosave="searchdoc" results="10" id="search" autocomplete="off" tabindex="-1" />
+    <label class="panel_mobile_button_close" for="hamburger"><span></span> Close</label>
+  </div>
+  <div class="tree">
+    <ul>
+    </ul>
+  </div>
+  <div class="result">
+    <ul>
+    </ul>
+  </div>
+  <a href="links.html" id="links">index</a>
+</nav>
+
+
+    <div class="banner">
+        
+        <h2>
+            <span class="type">Class</span>
+            AnkiRecord::Note
+            
+                <span class="parent">&lt;
+                    
+                    Object
+                    
+                </span>
+            
+        </h2>
+        <ul class="files">
+            
+            <li><a href="../../files/lib/anki_record/note/note_rb.html">lib/anki_record/note/note.rb</a></li>
+            
+        </ul>
+        
+    </div>
+
+    <main id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Represents an Anki note. The note object corresponds to a record in the ‘notes` table in the collection.anki21 database.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-method_missing">method_missing</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-respond_to_missing-3F">respond_to_missing?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-save">save</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="ChecksumHelper.html">
+              AnkiRecord::ChecksumHelper
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="NoteAttributes.html">
+              AnkiRecord::NoteAttributes
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="TimeHelper.html">
+              AnkiRecord::TimeHelper
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <h2 class="sectiontitle">Class Public methods</h2>
+      
+        <div class="method">
+          <h3 class="title method-title" id="method-c-new">
+            
+              <b>new</b>(note_type: nil, deck: nil, collection: nil, data: nil)
+            
+            <a href="../../classes/AnkiRecord/Note.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Instantiates a note of type <code>note_type</code> and belonging to deck <code>deck</code>.</p>
+
+<p>If <code>note_type</code> and <code>deck</code> arguments are used, <code>collection</code> and +data should not be given.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">note_type:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">deck:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">collection:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">data:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">note_type</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">deck</span>
+    <span class="ruby-identifier">setup_instance_variables_for_new_note</span>(<span class="ruby-value">note_type:</span> <span class="ruby-identifier">note_type</span>, <span class="ruby-value">deck:</span> <span class="ruby-identifier">deck</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">collection</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>
+    <span class="ruby-identifier">setup_instance_variables_from_existing</span>(<span class="ruby-value">collection:</span> <span class="ruby-identifier">collection</span>,
+                                           <span class="ruby-value">note_data:</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:note_data</span>], <span class="ruby-value">cards_data:</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:cards_data</span>])
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+      <h2 class="sectiontitle">Instance Public methods</h2>
+      
+        <div class="method">
+          <h3 class="title method-title" id="method-i-method_missing">
+            
+              <b>method_missing</b>(method_name, field_content = nil)
+            
+            <a href="../../classes/AnkiRecord/Note.html#method-i-method_missing" name="method-i-method_missing" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Overrides BasicObject#method_missing and creates “ghost methods”.</p>
+
+<p>The ghost methods are the setters and getters for the note field values.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-method_missing_source')" id="l_method-i-method_missing_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-method_missing_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">method_missing</span>(<span class="ruby-identifier">method_name</span>, <span class="ruby-identifier">field_content</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoMethodError</span>, <span class="ruby-node">&quot;##{method_name} is not defined or a ghost method&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">respond_to_missing?</span> <span class="ruby-identifier">method_name</span>
+
+  <span class="ruby-identifier">method_name</span> = <span class="ruby-identifier">method_name</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@field_contents</span>[<span class="ruby-identifier">method_name</span>] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">method_name</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&quot;=&quot;</span>)
+
+  <span class="ruby-ivar">@field_contents</span>[<span class="ruby-identifier">method_name</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&quot;=&quot;</span>)] = <span class="ruby-identifier">field_content</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-respond_to_missing-3F">
+            
+              <b>respond_to_missing?</b>(method_name, *)
+            
+            <a href="../../classes/AnkiRecord/Note.html#method-i-respond_to_missing-3F" name="method-i-respond_to_missing-3F" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>This allows respond_to? to be accurate for the ghost methods created by <a href="Note.html#method-i-method_missing"><code>method_missing</code></a>.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-respond_to_missing-3F_source')" id="l_method-i-respond_to_missing-3F_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-respond_to_missing-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">respond_to_missing?</span>(<span class="ruby-identifier">method_name</span>, <span class="ruby-operator">*</span>)
+  <span class="ruby-identifier">method_name</span> = <span class="ruby-identifier">method_name</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">method_name</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&quot;=&quot;</span>)
+    <span class="ruby-identifier">note_type</span>.<span class="ruby-identifier">snake_case_field_names</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">method_name</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&quot;=&quot;</span>))
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">note_type</span>.<span class="ruby-identifier">snake_case_field_names</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">method_name</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-save">
+            
+              <b>save</b>()
+            
+            <a href="../../classes/AnkiRecord/Note.html#method-i-save" name="method-i-save" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Saves the note to the collection.anki21 database.</p>
+
+<p>This also saves the note’s cards.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-save_source')" id="l_method-i-save_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-save_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>
+  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">find_note_by</span>(<span class="ruby-value">id:</span> <span class="ruby-ivar">@id</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">update_note_in_collection_anki21</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">insert_new_note_in_collection_anki21</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </main>
+  </body>
+</html>

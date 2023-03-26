@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AnkiRecord::Collection</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/panel.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/turbolinks.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/search_index.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/searcher.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../panel/tree.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/searchdoc.js" type="text/javascript" charset="utf-8"></script>
+<meta name="data-rel-prefix" content="../../">
+<meta name="data-tree-keys" content='["AnkiRecord", "Collection"]'>
+
+
+    <meta property="og:title" value="AnkiRecord::Collection">
+
+  
+    
+    <meta name="description" content="Collection represents the single record in the Anki collection.anki21 database’s ‘col` table. The note types, decks, and deck options groups data are contained within this record.">
+    <meta property="og:description" content="Collection represents the single record in the Anki collection.anki21 database’s ‘col` table. The note types, decks, and deck options groups data are contained within this record.">
+  
+
+    <meta name="keywords" content="AnkiRecord::Collection class, find_note_type_by, find_deck_by, find_deck_options_group_by, find_note_by">
+</head>
+
+<body>
+    <a class="sr-only sr-only-focusable" href="#content" data-turbolinks="false">Skip to Content</a>
+    <a class="sr-only sr-only-focusable" href="#search" data-turbolinks="false">Skip to Search</a>
+
+    <input type="checkbox" id="hamburger" class="panel_checkbox">
+<label class="panel_mobile_button" for="hamburger"><span></span> Menu</label>
+<nav class="panel panel_tree" id="panel" data-turbolinks-permanent>
+  <div class="header">
+    <input type="text" placeholder="Search (/) for a class, method, ..." autosave="searchdoc" results="10" id="search" autocomplete="off" tabindex="-1" />
+    <label class="panel_mobile_button_close" for="hamburger"><span></span> Close</label>
+  </div>
+  <div class="tree">
+    <ul>
+    </ul>
+  </div>
+  <div class="result">
+    <ul>
+    </ul>
+  </div>
+  <a href="links.html" id="links">index</a>
+</nav>
+
+
+    <div class="banner">
+        
+        <h2>
+            <span class="type">Class</span>
+            AnkiRecord::Collection
+            
+                <span class="parent">&lt;
+                    
+                    Object
+                    
+                </span>
+            
+        </h2>
+        <ul class="files">
+            
+            <li><a href="../../files/lib/anki_record/collection/collection_rb.html">lib/anki_record/collection/collection.rb</a></li>
+            
+        </ul>
+        
+    </div>
+
+    <main id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="Collection.html"><code>Collection</code></a> represents the single record in the Anki collection.anki21 database’s ‘col` table. The note types, decks, and deck options groups data are contained within this record.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-find_deck_by">find_deck_by</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_deck_options_group_by">find_deck_options_group_by</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_note_by">find_note_by</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_note_type_by">find_note_type_by</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="TimeHelper.html">
+              AnkiRecord::TimeHelper
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="CollectionAttributes.html">
+              AnkiRecord::CollectionAttributes
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <h2 class="sectiontitle">Instance Public methods</h2>
+      
+        <div class="method">
+          <h3 class="title method-title" id="method-i-find_deck_by">
+            
+              <b>find_deck_by</b>(name: nil, id: nil)
+            
+            <a href="../../classes/AnkiRecord/Collection.html#method-i-find_deck_by" name="method-i-find_deck_by" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns the collection’s deck object found by either <code>name</code> or <code>id</code>, or nil if it is not found.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-find_deck_by_source')" id="l_method-i-find_deck_by_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-find_deck_by_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/collection/collection.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_deck_by</span>(<span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">id:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">name</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,
+          <span class="ruby-string">&quot;You must pass either an id or name keyword argument.&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">name</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">find_deck_by_name</span>(<span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">find_deck_by_id</span>(<span class="ruby-value">id:</span> <span class="ruby-identifier">id</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-find_deck_options_group_by">
+            
+              <b>find_deck_options_group_by</b>(id:)
+            
+            <a href="../../classes/AnkiRecord/Collection.html#method-i-find_deck_options_group_by" name="method-i-find_deck_options_group_by" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns the collection’s deck options group object found by <code>id</code>, or nil if it is not found.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-find_deck_options_group_by_source')" id="l_method-i-find_deck_options_group_by_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-find_deck_options_group_by_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/collection/collection.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_deck_options_group_by</span>(<span class="ruby-value">id:</span>)
+  <span class="ruby-identifier">deck_options_groups</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">deck_options_group</span><span class="ruby-operator">|</span> <span class="ruby-identifier">deck_options_group</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">id</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-find_note_by">
+            
+              <b>find_note_by</b>(id:)
+            
+            <a href="../../classes/AnkiRecord/Collection.html#method-i-find_note_by" name="method-i-find_note_by" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns the collection’s note object found by <code>id</code>, or nil if it is not found.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-find_note_by_source')" id="l_method-i-find_note_by_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-find_note_by_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/collection/collection.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_note_by</span>(<span class="ruby-value">id:</span>)
+  <span class="ruby-identifier">note_cards_data</span> = <span class="ruby-identifier">note_cards_data_for_note_id</span> <span class="ruby-value">sql_able:</span> <span class="ruby-identifier">anki_package</span>, <span class="ruby-value">id:</span> <span class="ruby-identifier">id</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">note_cards_data</span>
+
+  <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Note</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">collection:</span> <span class="ruby-keyword">self</span>, <span class="ruby-value">data:</span> <span class="ruby-identifier">note_cards_data</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-find_note_type_by">
+            
+              <b>find_note_type_by</b>(name: nil, id: nil)
+            
+            <a href="../../classes/AnkiRecord/Collection.html#method-i-find_note_type_by" name="method-i-find_note_type_by" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns the collection’s note type object found by either <code>name</code> or <code>id</code>, or nil if it is not found.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-find_note_type_by_source')" id="l_method-i-find_note_type_by_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-find_note_type_by_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/collection/collection.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_note_type_by</span>(<span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">id:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">name</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,
+          <span class="ruby-string">&quot;You must pass either an id or name keyword argument.&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">name</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">find_note_type_by_name</span>(<span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">find_note_type_by_id</span>(<span class="ruby-value">id:</span> <span class="ruby-identifier">id</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </main>
+  </body>
+</html>
