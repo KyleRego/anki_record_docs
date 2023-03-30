@@ -51,7 +51,7 @@
         </h2>
         <ul class="files">
             <li>README.md</li>
-            <li>Last modified: 2023-03-26 10:05:57 -0400</li>
+            <li>Last modified: 2023-03-30 18:16:17 -0400</li>
         </ul>
         
     </div>
@@ -63,11 +63,7 @@
       
 <h1 id="label-Anki+Record">Anki Record</h1>
 
-<p>Anki Record is a Ruby library which provides a programmatic interface to Anki flashcard decks/deck packages (<code>.apkg</code> files or Anki SQLite databases).</p>
-
-<p><strong>Development is ongoing and currently released versions may have some bugs. The library does not support media yet.</strong></p>
-
-<p><strong>To import the deck packages into Anki, click the File menu and then “Import” from inside Anki. Do not double click the <code>.apkg</code> file to open Anki and import it at the same time.</strong></p>
+<p>Anki Record is a Ruby library which provides a programmatic interface to Anki flashcard deck package files (Anki SQLite databases). It isn’t finished (the main thing it does not support yet is media). Development is currently paused (unless any bugs are discovered, which I will fix as soon as I know them) while I do some initial work on a Rails application that is the reason I developed the gem. But after that, Anki Record will have features added to add media to notes.</p>
 
 <h2 id="label-Installation">Installation</h2>
 
@@ -82,6 +78,8 @@
 </code></pre>
 
 <h2 id="label-Usage">Usage</h2>
+
+<p><strong>To import any deck package (created by this gem or otherwise) into Anki, click the File menu and then “Import” from inside Anki. Do not double click the <code>.apkg</code> file to open Anki and import it at the same time.</strong></p>
 
 <p>The Anki package object is instantiated with <code>AnkiRecord::AnkiPackage.new</code>. If this is passed a block, it will execute the block, and afterwards zip an <code>*.apkg</code> file where <code>*</code> is the name argument (this argument is not allowed to contain spaces):</p>
 
@@ -114,17 +112,17 @@ apkg.zip # This zips the temporary files into test.apkg, and then deletes them.
 
 <pre><code>require &quot;anki_record&quot;
 
-apkg = AnkiRecord::AnkiPackage.new(name: &quot;test&quot;) do |apkg|
-  deck = apkg.collection.find_deck_by name: &quot;Default&quot;
+apkg = AnkiRecord::AnkiPackage.new(name: &quot;test&quot;) do |collection|
+  deck = collection.find_deck_by name: &quot;Default&quot;
 
-  note_type = apkg.collection.find_note_type_by name: &quot;Basic&quot;
+  note_type = collection.find_note_type_by name: &quot;Basic&quot;
 
   note = AnkiRecord::Note.new note_type: note_type, deck: deck
   note.front = &quot;Hello&quot;
   note.back = &quot;World&quot;
   note.save
 
-  note_type2 = apkg.collection.find_note_type_by name: &quot;Cloze&quot;
+  note_type2 = collection.find_note_type_by name: &quot;Cloze&quot;
 
   note2 = AnkiRecord::Note.new note_type: note_type2, deck: deck
   note2.text = &quot;Cloze {{c1::Hello}}&quot;
@@ -197,78 +195,42 @@ end
 </code></pre>
 
 <p>The RSpec test suite files in <code>spec</code> have a mapping with the source code in <code>lib</code>.</p>
+<!-- ## Development
 
-<h2 id="label-Development">Development</h2>
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-<p>After checking out the repo, run <code>bin/setup</code> to install dependencies. Then, run <code>rake spec</code> to run the tests. You can also run <code>bin/console</code> for an interactive prompt that will allow you to experiment.</p>
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
-<p>To install this gem onto your local machine, run <code>bundle exec rake install</code>. To release a new version, update the version number in <code>version.rb</code>, and then run <code>bundle exec rake release</code>, which will create a git tag for the version, push git commits and the created tag, and push the <code>.gem</code> file to <a href="https://rubygems.org">rubygems.org</a>.</p>
+### Development road map:
+- Better messages when `ArgumentError` raised
+- Add #inspect methods
+- Refactor tests to improve speed
+- Copying the contents of an existing package into the new package when it is opened
+    - Add more unit tests
+- Work on creating, updating, and saving notes and cards to the collection.anki21 database
+    - Updating notes when they already exist in the database
+        - Add more unit tests
+    - Validation logic of what makes the note valid based on the note type's card templates and fields
+    - Work on adding media support
+      - The checksum calculation for notes will need to be updated to account for HTML in the content
+- Saving note types, decks, and deck options groups to the collection.anki21 database
+    - Deck options groups cannot be saved yet.
+    - Add being able to handle subdecks
+    - Updating them when they already exist
+    - Setters for any relevant attributes with validation
+- Refactoring
+    - Use more specific RSpec matchers than `eq` everywhere
+    - Investigate if note guid is determined in Anki in a non-random way
+    - Investigate if the database ever needs to be explicitly opened or closed
+- Note type allowed fields: investigate if there are other special field names that should be allowed.
 
-<h3 id="label-Development+road+map-3A">Development road map:</h3>
-<ul><li>
-<p>Better messages when <code>ArgumentError</code> raised</p>
-</li><li>
-<p>Add inspect methods</p>
-</li><li>
-<p>Refactor tests to improve speed</p>
-</li><li>
-<p>Copying the contents of an existing package into the new package when it is opened</p>
-<ul><li>
-<p>Add more unit tests</p>
-</li></ul>
-</li><li>
-<p>Work on creating, updating, and saving notes and cards to the collection.anki21 database</p>
-<ul><li>
-<p>Updating notes when they already exist in the database</p>
-<ul><li>
-<p>Add more unit tests</p>
-</li></ul>
-</li><li>
-<p>Validation logic of what makes the note valid based on the note type’s card templates and fields</p>
-</li><li>
-<p>Work on adding media support</p>
-</li><li>
-<p>The checksum calculation for notes will need to be updated to account for HTML in the content</p>
-</li></ul>
-</li><li>
-<p>Saving note types, decks, and deck options groups to the collection.anki21 database</p>
-<ul><li>
-<p>Deck options groups cannot be saved yet.</p>
-</li><li>
-<p>Add being able to handle subdecks</p>
-</li><li>
-<p>Updating them when they already exist</p>
-</li><li>
-<p>Setters for any relevant attributes with validation</p>
-</li></ul>
-</li><li>
-<p>Refactoring</p>
-<ul><li>
-<p>Use more specific RSpec matchers than <code>eq</code> everywhere</p>
-</li><li>
-<p>Investigate if note guid is determined in Anki in a non-random way</p>
-</li><li>
-<p>Investigate if the database ever needs to be explicitly opened or closed</p>
-</li></ul>
-</li><li>
-<p>Note type allowed fields: investigate if there are other special field names that should be allowed.</p>
-</li></ul>
-
-<h3 id="label-Release+checklist">Release checklist</h3>
-<ul><li>
-<p>Remove <code>require &quot;pry&quot;</code></p>
-</li><li>
-<p>Update changelog</p>
-</li><li>
-<p>Update usage examples</p>
-</li><li>
-<p>Update and regenerate documentation</p>
-</li><li>
-<p>Bump version</p>
-</li><li>
-<p>Release gem</p>
-</li></ul>
-<!-- ## Contributing
+### Release checklist
+- Remove `require "pry"`
+- Update changelog
+- Update usage examples
+- Update and regenerate documentation
+- Bump version
+- Release gem --><!-- ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/KyleRego/anki_record. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/KyleRego/anki_record/blob/master/CODE_OF_CONDUCT.md). -->
 <h2 id="label-License">License</h2>

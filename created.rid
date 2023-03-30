@@ -1,8 +1,8 @@
-Sun, 26 Mar 2023 10:06:19 -0400
+Thu, 30 Mar 2023 18:16:26 -0400
 CHANGELOG.md	Sun, 26 Mar 2023 09:59:16 -0400
 CODE_OF_CONDUCT.md	Thu, 02 Feb 2023 18:54:15 -0500
 LICENSE.txt	Thu, 02 Feb 2023 18:54:15 -0500
-README.md	Sun, 26 Mar 2023 10:05:57 -0400
+README.md	Thu, 30 Mar 2023 18:16:17 -0400
 lib/anki_record/anki_package/anki_package.rb	Sun, 26 Mar 2023 09:39:22 -0400
 lib/anki_record/anki_package/database_setup_constants.rb	Sat, 25 Mar 2023 18:04:30 -0400
 lib/anki_record/card/card.rb	Sat, 25 Mar 2023 18:31:57 -0400
