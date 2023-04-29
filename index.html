@@ -51,7 +51,7 @@
         </h2>
         <ul class="files">
             <li>README.md</li>
-            <li>Last modified: 2023-03-30 18:16:17 -0400</li>
+            <li>Last modified: 2023-04-29 10:19:48 -0400</li>
         </ul>
         
     </div>
@@ -63,7 +63,7 @@
       
 <h1 id="label-Anki+Record">Anki Record</h1>
 
-<p>Anki Record is a Ruby library which provides a programmatic interface to Anki flashcard deck package files (Anki SQLite databases). It isn’t finished (the main thing it does not support yet is media). Development is currently paused (unless any bugs are discovered, which I will fix as soon as I know them) while I do some initial work on a Rails application that is the reason I developed the gem. But after that, Anki Record will have features added to add media to notes.</p>
+<p>Anki Record is a Ruby gem providing an API to Anki flashcard deck packages (zipped SQLite databases). The main thing it does not support yet is adding media to the notes.</p>
 
 <h2 id="label-Installation">Installation</h2>
 
@@ -79,13 +79,11 @@
 
 <h2 id="label-Usage">Usage</h2>
 
-<p><strong>To import any deck package (created by this gem or otherwise) into Anki, click the File menu and then “Import” from inside Anki. Do not double click the <code>.apkg</code> file to open Anki and import it at the same time.</strong></p>
-
-<p>The Anki package object is instantiated with <code>AnkiRecord::AnkiPackage.new</code>. If this is passed a block, it will execute the block, and afterwards zip an <code>*.apkg</code> file where <code>*</code> is the name argument (this argument is not allowed to contain spaces):</p>
+<p>The Anki package object is instantiated with <code>AnkiRecord::AnkiPackage.new</code>. If this is passed a block, the collection object is yielded to the block, and an Anki deck package file is created after execution of the block:</p>
 
 <pre><code>require &quot;anki_record&quot;
 
-AnkiRecord::AnkiPackage.new(name: &quot;test&quot;) do |apkg|
+AnkiRecord::AnkiPackage.new(name: &quot;test&quot;) do |collection|
   3.times do |number|
     puts &quot;#{3 - number}...&quot;
   end
@@ -103,6 +101,8 @@ end
 <pre><code>require &quot;anki_record&quot;
 
 apkg = AnkiRecord::AnkiPackage.new(name: &quot;test&quot;)
+collection = apkg.collection
+# Add notes to the collection
 apkg.zip # This zips the temporary files into test.apkg, and then deletes them.
 </code></pre>
 
@@ -112,7 +112,7 @@ apkg.zip # This zips the temporary files into test.apkg, and then deletes them.
 
 <pre><code>require &quot;anki_record&quot;
 
-apkg = AnkiRecord::AnkiPackage.new(name: &quot;test&quot;) do |collection|
+AnkiRecord::AnkiPackage.new(name: &quot;test&quot;) do |collection|
   deck = collection.find_deck_by name: &quot;Default&quot;
 
   note_type = collection.find_note_type_by name: &quot;Basic&quot;
@@ -141,6 +141,7 @@ note_id = nil
 
 AnkiRecord::AnkiPackage.new(name: &quot;test_1&quot;) do |collection|
   crazy_deck = AnkiRecord::Deck.new collection: collection, name: &quot;test_1_deck&quot;
+  crazy_deck.save
 
   crazy_note_type = AnkiRecord::NoteType.new collection: collection, name: &quot;test 1 note type&quot;
   AnkiRecord::NoteField.new note_type: crazy_note_type, name: &quot;crazy front&quot;
@@ -185,16 +186,18 @@ end
 
 <p>The <a href="https://kylerego.github.io/anki_record_docs">API Documentation</a> is generated using SDoc from comments in the source code. You might notice that some public methods are intentionally omitted from this documentation. Although public, these methods are not intended to be used outside of the gem’s implementation and should be treated as private.</p>
 
-<p>The RSpec examples are intended to provide executable documentation and may also be helpful to understand the API. Running the test suite with the <code>rspec</code> command will output these in a more readable way that also reflects the nesting of the RSpec examples and example groups. The following is an example of output from one example in <code>spec/anki_record/note_spec.rb</code>:</p>
+<p>The RSpec examples are intended to provide executable documentation and may also be helpful to understand the API. Running the test suite with the <code>rspec</code> command will output these in a more readable way that also reflects the nesting of the RSpec examples and example groups. This is an example of part of the output:</p>
 
-<pre><code>AnkiRecord::Note
-  #save
-    for a note that does not exist in the collection.anki21 database (custom note type, 2 card templates)
-      should save two card records to the collection.anki21 database
-        with nid values equal to the id of the cards&#39; note object&#39;s id
+<pre><code>AnkiRecord::Deck#save
+  when the deck does not exist in the collection.anki21 database
+    saves the deck object&#39;s id as a key in the decks column&#39;s JSON object in the collection.anki21 database
+    saves the deck object as a hash, as the value of the deck object&#39;s id key, in the decks hash
+    saves the deck object as a hash with the following keys: &#39;id&#39;, &#39;mod&#39;, &#39;name&#39;, &#39;usn&#39;, &#39;lrnToday&#39;, &#39;revToday&#39;, &#39;newToday&#39;, &#39;timeToday&#39;, &#39;collapsed&#39;, &#39;browserCollapsed&#39;, &#39;desc&#39;, &#39;dyn&#39;, &#39;conf&#39;, &#39;extendNew&#39;, &#39;extendRev&#39;
+    saves the deck object as a hash with the deck object&#39;s id attribute as the value for the id key in the deck hash
+    saves the deck object as a hash with the deck object&#39;s last_modified_timestamp attribute as the value for the mod key in the deck hash
 </code></pre>
 
-<p>The RSpec test suite files in <code>spec</code> have a mapping with the source code in <code>lib</code>.</p>
+<p>The RSpec test suite files in <code>spec</code> are organized similarly to the the source code in <code>lib</code>.</p>
 <!-- ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
