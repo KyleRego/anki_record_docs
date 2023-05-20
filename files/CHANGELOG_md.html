@@ -55,7 +55,7 @@
                 CHANGELOG.md
                 
             </li>
-            <li>Last modified: 2023-04-29 09:39:38 -0400</li>
+            <li>Last modified: 2023-05-20 15:18:30 -0400</li>
         </ul>
         
     </div>
@@ -133,13 +133,20 @@
 <p>RSpec test suite was refactored to improve speed: 4 minutes -&gt; 1.5 minutes.</p>
 </li></ul>
 
-<h2 id="label-5B0.4.0-5D+-+Not+released">[0.4.0] - Not released</h2>
+<h2 id="label-5B0.3.1-5D+-+04-29-2023">[0.3.1] - 04-29-2023</h2>
 <ul><li>
 <p><code>Deck.new</code> was saving the deck to the <code>collection.anki21</code> database. Now it will only instantiate it and <code>#save</code> must be called to save it.</p>
 </li><li>
 <p><code>Helper</code> modules moved into the <code>Helpers</code> module namespace.</p>
 </li><li>
 <p>Bug fix addressing using the approximate milliseconds since the epoch as the primary key id causing the uniqueness constraint to fail when creating a lot of notes.</p>
+</li></ul>
+
+<h2 id="label-5B0.3.2-5D+-+05-20-2023">[0.3.2] - 05-20-2023</h2>
+<ul><li>
+<p>The private <code>Note</code> method <code>globally_unique_id</code> has been moved to <code>NoteGuidHelper</code> and included into note.</p>
+</li><li>
+<p>The <code>guid</code> attribute also now has a public setter.</p>
 </li></ul>
 
     </div>

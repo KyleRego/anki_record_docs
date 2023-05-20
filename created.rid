@@ -1,5 +1,5 @@
-Sat, 29 Apr 2023 10:49:45 -0400
-CHANGELOG.md	Sat, 29 Apr 2023 09:39:38 -0400
+Sat, 20 May 2023 15:18:51 -0400
+CHANGELOG.md	Sat, 20 May 2023 15:18:30 -0400
 CODE_OF_CONDUCT.md	Thu, 02 Feb 2023 18:54:15 -0500
 LICENSE.txt	Thu, 02 Feb 2023 18:54:15 -0500
 README.md	Sat, 29 Apr 2023 10:19:48 -0400
@@ -20,17 +20,19 @@ lib/anki_record/helpers/checksum_helper.rb	Sun, 23 Apr 2023 15:00:20 -0400
 lib/anki_record/helpers/data_query_helper.rb	Sun, 23 Apr 2023 15:04:21 -0400
 lib/anki_record/helpers/shared_constants_helper.rb	Sun, 23 Apr 2023 15:05:09 -0400
 lib/anki_record/helpers/time_helper.rb	Sat, 29 Apr 2023 10:27:38 -0400
-lib/anki_record/note/note.rb	Sat, 29 Apr 2023 10:29:11 -0400
-lib/anki_record/note/note_attributes.rb	Sat, 25 Mar 2023 18:43:31 -0400
+lib/anki_record/note/note.rb	Sat, 20 May 2023 15:13:21 -0400
+lib/anki_record/note/note_attributes.rb	Sat, 20 May 2023 14:59:53 -0400
+lib/anki_record/note/note_guid_helper.rb	Sat, 20 May 2023 15:09:29 -0400
 lib/anki_record/note_field/note_field.rb	Sat, 25 Mar 2023 17:50:30 -0400
 lib/anki_record/note_field/note_field_attributes.rb	Sat, 25 Mar 2023 17:50:43 -0400
 lib/anki_record/note_field/note_field_defaults.rb	Sat, 25 Mar 2023 17:50:19 -0400
 lib/anki_record/note_type/note_type.rb	Sun, 23 Apr 2023 15:07:39 -0400
 lib/anki_record/note_type/note_type_attributes.rb	Sat, 25 Mar 2023 09:33:29 -0400
 lib/anki_record/note_type/note_type_defaults.rb	Sat, 25 Mar 2023 09:30:48 -0400
-lib/anki_record/version.rb	Sat, 29 Apr 2023 09:29:06 -0400
+lib/anki_record/version.rb	Sat, 20 May 2023 14:55:42 -0400
 lib/anki_record.rb	Sun, 26 Mar 2023 09:32:19 -0400
 pkg/anki_record-0.1.1.gem	Sun, 05 Mar 2023 08:33:30 -0500
 pkg/anki_record-0.2.0.gem	Sun, 05 Mar 2023 09:42:30 -0500
 pkg/anki_record-0.3.0.gem	Sun, 26 Mar 2023 10:02:02 -0400
 pkg/anki_record-0.3.1.gem	Sat, 29 Apr 2023 10:47:49 -0400
+pkg/anki_record-0.3.2.gem	Sat, 20 May 2023 15:00:52 -0400
