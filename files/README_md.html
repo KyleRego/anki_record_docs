@@ -55,7 +55,7 @@
                 README.md
                 
             </li>
-            <li>Last modified: 2023-04-29 10:19:48 -0400</li>
+            <li>Last modified: 2023-07-08 15:41:48 -0400</li>
         </ul>
         
     </div>
@@ -67,7 +67,7 @@
       
 <h1 id="label-Anki+Record">Anki Record</h1>
 
-<p>Anki Record is a Ruby gem providing an API to Anki flashcard deck packages (zipped SQLite databases). The main thing it does not support yet is adding media to the notes.</p>
+<p>Anki Record is a Ruby gem to create and update Anki flashcard deck packages (files with the .apkg extension). It does not support adding media yet.</p>
 
 <h2 id="label-Installation">Installation</h2>
 
@@ -83,79 +83,30 @@
 
 <h2 id="label-Usage">Usage</h2>
 
-<p>The Anki package object is instantiated with <code>AnkiRecord::AnkiPackage.new</code>. If this is passed a block, the collection object is yielded to the block, and an Anki deck package file is created after execution of the block:</p>
+<p>This example shows how to create a new Anki package and also most of the features of the gem:</p>
 
 <pre><code>require &quot;anki_record&quot;
 
-AnkiRecord::AnkiPackage.new(name: &quot;test&quot;) do |collection|
-  3.times do |number|
-    puts &quot;#{3 - number}...&quot;
-  end
-  puts &quot;Countdown complete. Write any Ruby you want in here!&quot;
-end
-# test.apkg now exists in the current working directory.
-</code></pre>
+AnkiRecord::AnkiPackage.create(name: &quot;example&quot;) do |anki21_database|
+  # Creating a new deck
+  custom_deck = AnkiRecord::Deck.new(anki21_database:, name: &quot;New custom deck&quot;)
+  custom_deck.save
 
-<p>While execution is happening inside the block, temporary <code>collection.anki21</code> and <code>collection.anki2</code> SQLite databases and a <code>media</code> file exist inside of a temporary directory. These files are the normal zipped contents of an <code>*.apkg</code> file. <code>collection.anki21</code> is the database that the library is interacting with.</p>
-
-<p>If an exception is raised inside the block, the files are deleted without creating a new <code>*.apkg</code> zip file, so this is the recommended way.</p>
-
-<p>Alternatively, if <code>AnkiRecord::Package::new</code> is not passed a block, the <code>zip</code> method must be explicitly called on the Anki package object:</p>
-
-<pre><code>require &quot;anki_record&quot;
-
-apkg = AnkiRecord::AnkiPackage.new(name: &quot;test&quot;)
-collection = apkg.collection
-# Add notes to the collection
-apkg.zip # This zips the temporary files into test.apkg, and then deletes them.
-</code></pre>
-
-<p>The second, optional argument to <code>AnkiRecord::AnkiPackage.new</code> is <code>target_directory</code>. The default value is the current working directory, but if a relative file path argument is given, the new <code>*.apkg</code> file will be saved in that directory. An exception will be raised if the relative file path is not to a directory that exists.</p>
-
-<p>A new Anki package object is initialized with the “Default” deck and the default note types of a new Anki collection (including “Basic” and “Cloze”). The deck and note type objects are accessed through the <code>collection</code> attribute of the Anki package object through the <code>find_deck_by</code> and <code>find_note_type_by</code> methods passed the <code>name</code> keyword argument:</p>
-
-<pre><code>require &quot;anki_record&quot;
-
-AnkiRecord::AnkiPackage.new(name: &quot;test&quot;) do |collection|
-  deck = collection.find_deck_by name: &quot;Default&quot;
-
-  note_type = collection.find_note_type_by name: &quot;Basic&quot;
-
-  note = AnkiRecord::Note.new note_type: note_type, deck: deck
-  note.front = &quot;Hello&quot;
-  note.back = &quot;World&quot;
-  note.save
-
-  note_type2 = collection.find_note_type_by name: &quot;Cloze&quot;
-
-  note2 = AnkiRecord::Note.new note_type: note_type2, deck: deck
-  note2.text = &quot;Cloze {{c1::Hello}}&quot;
-  note2.back_extra = &quot;World&quot;
-  note2.save
-end
-</code></pre>
-
-<p>This example creates a <code>test.apkg</code> zip file in the current working directory, which when imported into Anki, will add one Basic note and one Cloze note.</p>
-
-<p>The next example shows some other features of the library:</p>
-
-<pre><code>require &quot;anki_record&quot;
-
-note_id = nil
-
-AnkiRecord::AnkiPackage.new(name: &quot;test_1&quot;) do |collection|
-  crazy_deck = AnkiRecord::Deck.new collection: collection, name: &quot;test_1_deck&quot;
-  crazy_deck.save
-
-  crazy_note_type = AnkiRecord::NoteType.new collection: collection, name: &quot;test 1 note type&quot;
-  AnkiRecord::NoteField.new note_type: crazy_note_type, name: &quot;crazy front&quot;
-  AnkiRecord::NoteField.new note_type: crazy_note_type, name: &quot;crazy back&quot;
-  crazy_card_template = AnkiRecord::CardTemplate.new note_type: crazy_note_type, name: &quot;test 1 card 1&quot;
-  crazy_card_template.question_format = &quot;{{crazy front}}&quot;
-  crazy_card_template.answer_format = &quot;{{crazy back}}&quot;
-  second_crazy_card_template = AnkiRecord::CardTemplate.new note_type: crazy_note_type, name: &quot;test 1 card 2&quot;
-  second_crazy_card_template.question_format = &quot;{{crazy back}}&quot;
-  second_crazy_card_template.answer_format = &quot;{{crazy front}}&quot;
+  # Creating a new note type
+  custom_note_type = AnkiRecord::NoteType.new(anki21_database:,
+                                              name: &quot;New custom note type&quot;)
+  AnkiRecord::NoteField.new(note_type: custom_note_type,
+                            name: &quot;custom front&quot;)
+  AnkiRecord::NoteField.new(note_type: custom_note_type,
+                            name: &quot;custom back&quot;)
+  custom_card_template = AnkiRecord::CardTemplate.new(note_type: custom_note_type,
+                                                      name: &quot;Custom template 1&quot;)
+  custom_card_template.question_format = &quot;{{custom front}}&quot;
+  custom_card_template.answer_format = &quot;{{custom back}}&quot;
+  second_custom_card_template = AnkiRecord::CardTemplate.new(note_type: custom_note_type,
+                                                             name: &quot;Custom template 2&quot;)
+  second_custom_card_template.question_format = &quot;{{custom back}}&quot;
+  second_custom_card_template.answer_format = &quot;{{custom front}}&quot;
 
   css = &lt;&lt;~CSS
     .card {
@@ -165,79 +116,91 @@ AnkiRecord::AnkiPackage.new(name: &quot;test_1&quot;) do |collection|
       text-align: center;
     }
   CSS
+  custom_note_type.css = css
+  custom_note_type.save
 
-  crazy_note_type.css = css
-  crazy_note_type.save
-
-  note = AnkiRecord::Note.new note_type: crazy_note_type, deck: crazy_deck
-  note.crazy_front = &quot;Hello from test 1&quot;
-  note.crazy_back = &quot;World&quot;
+  # Creating a note with the custom note type
+  note = AnkiRecord::Note.new(note_type: custom_note_type, deck: custom_deck)
+  note.custom_front = &quot;Content of the &#39;custom front&#39; field&quot;
+  note.custom_back = &quot;Content of the &#39;custom back&#39; field&quot;
   note.save
 
-  note_id = note.id
+  # The default deck
+  default_deck = anki21_database.find_deck_by(name: &quot;Default&quot;)
+
+  # All of the default Anki note types
+  basic_note_type = anki21_database.find_note_type_by(name: &quot;Basic&quot;)
+  basic_and_reversed_card_note_type = anki21_database.find_note_type_by(name: &quot;Basic (and reversed card)&quot;)
+  basic_and_optional_reversed_card_note_type = anki21_database.find_note_type_by(name: &quot;Basic (optional reversed card)&quot;)
+  basic_type_in_the_answer_note_type = anki21_database.find_note_type_by(name: &quot;Basic (type in the answer)&quot;)
+  cloze_note_type = anki21_database.find_note_type_by(name: &quot;Cloze&quot;)
+
+  # Creating notes using the default note types
+
+  basic_note = AnkiRecord::Note.new(note_type: basic_note_type, deck: default_deck)
+  basic_note.front = &quot;What molecule is most relevant to the name aerobic exercise?&quot;
+  basic_note.back = &quot;Oxygen&quot;
+  basic_note.save
+
+  # Creating a nested deck
+  amino_acids_deck = AnkiRecord::Deck.new(anki21_database:,
+                                          name: &quot;Biochemistry::Amino acids&quot;)
+  amino_acids_deck.save
+
+  basic_and_reversed_note = AnkiRecord::Note.new(note_type: basic_and_reversed_card_note_type,
+                                                 deck: amino_acids_deck)
+  basic_and_reversed_note.front = &quot;Tyrosine&quot;
+  basic_and_reversed_note.back = &quot;Y&quot;
+  basic_and_reversed_note.save
+
+  basic_and_optional_reversed_note = AnkiRecord::Note.new(note_type: basic_and_optional_reversed_card_note_type,
+                                                          deck: default_deck)
+  basic_and_optional_reversed_note.front = &quot;A technique where locations along a route are memorized and associated with ideas&quot;
+  basic_and_optional_reversed_note.back = &quot;The method of loci&quot;
+  basic_and_optional_reversed_note.add_reverse = &quot;Have a reverse card too&quot;
+  basic_and_optional_reversed_note.save
+
+  basic_type_in_the_answer_note = AnkiRecord::Note.new(note_type: basic_type_in_the_answer_note_type,
+                                                       deck: default_deck)
+  basic_type_in_the_answer_note.front = &quot;What Git command commits staged changes by changing the previous commit without editing the commit message?&quot;
+  basic_type_in_the_answer_note.back = &quot;git commit --amend --no-edit&quot;
+  basic_type_in_the_answer_note.save
+
+  cloze_note = AnkiRecord::Note.new(note_type: cloze_note_type, deck: default_deck)
+  cloze_note.text = &quot;Dysfunction of CN {{c1::VII}} occurs in Bell&#39;s palsy&quot;
+  cloze_note.back_extra = &quot;This condition involves one cranial nerve but can have myriad neurological symptoms&quot;
+  cloze_note.save
 end
+# The example.apkg package now exists in the current
+# working directory and contains 6 notes.
+</code></pre>
 
-AnkiRecord::AnkiPackage.open(path: &quot;./test_1.apkg&quot;) do |collection|
-  note = collection.find_note_by id: note_id
-  note.crazy_back = &quot;Ruby&quot;
-  note.save
+<p><code>AnkiRecord::AnkiPackage.new</code> can also take a <code>target_directory</code> keyword argument to specify the directory to save the Anki package. If an error is thrown inside the block argument, temporary files that exist during execution of the block (Anki SQLite databases and the file called <code>media</code>) are deleted and no new Anki package is created.</p>
+
+<p>The gem can also be used to update an existing Anki package:</p>
+
+<pre><code>require &quot;anki_record&quot;
+
+AnkiRecord::AnkiPackage.update(path: &quot;./example.apkg&quot;) do |anki21_database|
+  amino_acids_deck = anki21_database.find_deck_by(name: &quot;Biochemistry::Amino acids&quot;)
+  custom_note_type = anki21_database.find_note_type_by(name: &quot;New custom note type&quot;)
+
+  # Create more decks, note types, notes etc. There are not many methods that would be useful here for finding and updating notes yet.
 end
 </code></pre>
 
-<p>This script creates an Anki package <code>test_1.apkg</code> with a new deck and new note type, and one note in that deck using that type. It then opens that Anki package, and edits the note. Note that the <code>test_1.apkg</code> file is not changed by this. Instead, a new package with a name similar to <code>test_1-1679835468.apkg</code> is created (the number is a timestamp).</p>
+<p>If an error is thrown in the block here, the original Anki package will not be changed.</p>
 
 <h2 id="label-Documentation">Documentation</h2>
 
-<p>The <a href="https://kylerego.github.io/anki_record_docs">API Documentation</a> is generated using SDoc from comments in the source code. You might notice that some public methods are intentionally omitted from this documentation. Although public, these methods are not intended to be used outside of the gem’s implementation and should be treated as private.</p>
+<p>The <a href="https://kylerego.github.io/anki_record_docs">API Documentation</a> is generated from comments in the source code could be useful if the above examples are not sufficient for your use case.</p>
 
-<p>The RSpec examples are intended to provide executable documentation and may also be helpful to understand the API. Running the test suite with the <code>rspec</code> command will output these in a more readable way that also reflects the nesting of the RSpec examples and example groups. This is an example of part of the output:</p>
+<h2 id="label-Development">Development</h2>
 
-<pre><code>AnkiRecord::Deck#save
-  when the deck does not exist in the collection.anki21 database
-    saves the deck object&#39;s id as a key in the decks column&#39;s JSON object in the collection.anki21 database
-    saves the deck object as a hash, as the value of the deck object&#39;s id key, in the decks hash
-    saves the deck object as a hash with the following keys: &#39;id&#39;, &#39;mod&#39;, &#39;name&#39;, &#39;usn&#39;, &#39;lrnToday&#39;, &#39;revToday&#39;, &#39;newToday&#39;, &#39;timeToday&#39;, &#39;collapsed&#39;, &#39;browserCollapsed&#39;, &#39;desc&#39;, &#39;dyn&#39;, &#39;conf&#39;, &#39;extendNew&#39;, &#39;extendRev&#39;
-    saves the deck object as a hash with the deck object&#39;s id attribute as the value for the id key in the deck hash
-    saves the deck object as a hash with the deck object&#39;s last_modified_timestamp attribute as the value for the mod key in the deck hash
-</code></pre>
+<p>After checking out the repo, run <code>bin/setup</code> to install dependencies. Then, run <code>rake spec</code> to run the tests. You can also run <code>bin/console</code> for an interactive prompt that will allow you to experiment.</p>
 
-<p>The RSpec test suite files in <code>spec</code> are organized similarly to the the source code in <code>lib</code>.</p>
-<!-- ## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-### Development road map:
-- Better messages when `ArgumentError` raised
-- Add #inspect methods
-- Refactor tests to improve speed
-- Copying the contents of an existing package into the new package when it is opened
-    - Add more unit tests
-- Work on creating, updating, and saving notes and cards to the collection.anki21 database
-    - Updating notes when they already exist in the database
-        - Add more unit tests
-    - Validation logic of what makes the note valid based on the note type's card templates and fields
-    - Work on adding media support
-      - The checksum calculation for notes will need to be updated to account for HTML in the content
-- Saving note types, decks, and deck options groups to the collection.anki21 database
-    - Deck options groups cannot be saved yet.
-    - Add being able to handle subdecks
-    - Updating them when they already exist
-    - Setters for any relevant attributes with validation
-- Refactoring
-    - Use more specific RSpec matchers than `eq` everywhere
-    - Investigate if note guid is determined in Anki in a non-random way
-    - Investigate if the database ever needs to be explicitly opened or closed
-- Note type allowed fields: investigate if there are other special field names that should be allowed.
-
-### Release checklist
-- Remove `require "pry"`
-- Update changelog
-- Update usage examples
-- Update and regenerate documentation
-- Bump version
-- Release gem --><!-- ## Contributing
+<p>To install this gem onto your local machine, run <code>bundle exec rake install</code>. To release a new version, update the version number in <code>version.rb</code>, and then run <code>bundle exec rake release</code>, which will create a git tag for the version, push git commits and the created tag, and push the <code>.gem</code> file to <a href="https://rubygems.org">rubygems.org</a>.</p>
+<!-- ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/KyleRego/anki_record. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/KyleRego/anki_record/blob/master/CODE_OF_CONDUCT.md). -->
 <h2 id="label-License">License</h2>

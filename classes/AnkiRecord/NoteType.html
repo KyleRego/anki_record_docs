@@ -24,8 +24,8 @@
 
   
     
-    <meta name="description" content="NoteType represents an Anki note type (also called a model).  The attributes are documented in the NoteTypeAttributes module.">
-    <meta property="og:description" content="NoteType represents an Anki note type (also called a model).  The attributes are documented in the NoteTypeAttributes module.">
+    <meta name="description" content="NoteType represents an Anki note type (also called a model).">
+    <meta property="og:description" content="NoteType represents an Anki note type (also called a model).">
   
 
     <meta name="keywords" content="AnkiRecord::NoteType class, new, save, find_card_template_by, field_names_in_order, sort_field_name, allowed_card_template_question_format_field_names, allowed_card_template_answer_format_field_names">
@@ -81,8 +81,6 @@
     <div class="description">
       
 <p><a href="NoteType.html"><code>NoteType</code></a> represents an Anki note type (also called a model).</p>
-
-<p>The attributes are documented in the <a href="NoteTypeAttributes.html"><code>NoteTypeAttributes</code></a> module.</p>
 
     </div>
   
@@ -233,14 +231,14 @@
         <div class="method">
           <h3 class="title method-title" id="method-c-new">
             
-              <b>new</b>(collection:, name: nil, args: nil)
+              <b>new</b>(anki21_database:, name: nil, args: nil)
             
             <a href="../../classes/AnkiRecord/NoteType.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </h3>
 
           
             <div class="description">
-              
+              <p>Instantiates a new note type belonging to <code>anki21_database</code> with name <code>name</code></p>
             </div>
           
 
@@ -265,19 +263,18 @@
               </p>
               <div id="method-c-new_source" class="dyn-source">
                 <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 24</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">collection:</span>, <span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">args:</span> <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">anki21_database:</span>, <span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">args:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">name</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">args</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>[<span class="ruby-string">&quot;name&quot;</span>])
 
-  <span class="ruby-ivar">@collection</span> = <span class="ruby-identifier">collection</span>
+  <span class="ruby-ivar">@anki21_database</span> = <span class="ruby-identifier">anki21_database</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>
-    <span class="ruby-identifier">setup_note_type_instance_variables_from_existing</span>(<span class="ruby-value">args:</span> <span class="ruby-identifier">args</span>)
+    <span class="ruby-identifier">setup_note_type_instance_variables_from_existing</span>(<span class="ruby-value">args:</span>)
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">setup_instance_variables_for_new_note_type</span>(<span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>)
+    <span class="ruby-identifier">setup_instance_variables_for_new_note_type</span>(<span class="ruby-value">name:</span>)
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-ivar">@collection</span>.<span class="ruby-identifier">add_note_type</span> <span class="ruby-keyword">self</span>
-  <span class="ruby-identifier">save</span>
+  <span class="ruby-ivar">@anki21_database</span>.<span class="ruby-identifier">add_note_type</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -322,7 +319,7 @@
                 
               </p>
               <div id="method-i-allowed_card_template_answer_format_field_names_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 93</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">allowed_card_template_answer_format_field_names</span>
   <span class="ruby-identifier">allowed_card_template_question_format_field_names</span> <span class="ruby-operator">+</span> [<span class="ruby-string">&quot;FrontSide&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -365,7 +362,7 @@
                 
               </p>
               <div id="method-i-allowed_card_template_question_format_field_names_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 86</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">allowed_card_template_question_format_field_names</span>
   <span class="ruby-identifier">allowed</span> = <span class="ruby-identifier">field_names_in_order</span>
   <span class="ruby-identifier">cloze</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">allowed</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">field_names_in_order</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">field_name</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;cloze:#{field_name}&quot;</span> } <span class="ruby-operator">:</span> <span class="ruby-identifier">allowed</span>
@@ -409,7 +406,7 @@
                 
               </p>
               <div id="method-i-field_names_in_order_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 66</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_names_in_order</span>
   <span class="ruby-ivar">@note_fields</span>.<span class="ruby-identifier">sort_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:ordinal_number</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:name</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -452,7 +449,7 @@
                 
               </p>
               <div id="method-i-find_card_template_by_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 60</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_card_template_by</span>(<span class="ruby-value">name:</span>)
   <span class="ruby-identifier">card_templates</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">template</span><span class="ruby-operator">|</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -495,12 +492,12 @@
                 
               </p>
               <div id="method-i-save_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 41</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>
-  <span class="ruby-identifier">collection_models_hash</span> = <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">models_json</span>
+  <span class="ruby-identifier">collection_models_hash</span> = <span class="ruby-identifier">anki21_database</span>.<span class="ruby-identifier">models_json</span>
   <span class="ruby-identifier">collection_models_hash</span>[<span class="ruby-ivar">@id</span>] = <span class="ruby-identifier">to_h</span>
   <span class="ruby-identifier">sql</span> = <span class="ruby-string">&quot;update col set models = ? where id = ?&quot;</span>
-  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">anki_package</span>.<span class="ruby-identifier">prepare</span>(<span class="ruby-identifier">sql</span>).<span class="ruby-identifier">execute</span>([<span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-identifier">collection_models_hash</span>), <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">id</span>])
+  <span class="ruby-identifier">anki21_database</span>.<span class="ruby-identifier">prepare</span>(<span class="ruby-identifier">sql</span>).<span class="ruby-identifier">execute</span>([<span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-identifier">collection_models_hash</span>), <span class="ruby-identifier">anki21_database</span>.<span class="ruby-identifier">collection</span>.<span class="ruby-identifier">id</span>])
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -541,7 +538,7 @@
                 
               </p>
               <div id="method-i-sort_field_name_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 76</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sort_field_name</span>
   <span class="ruby-ivar">@note_fields</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">ordinal_number</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@sort_field</span> }&amp;.<span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>

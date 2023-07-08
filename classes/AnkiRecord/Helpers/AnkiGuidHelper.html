@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AnkiRecord::Helpers::AnkiGuidHelper</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/panel.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/turbolinks.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/search_index.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/searcher.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../panel/tree.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/searchdoc.js" type="text/javascript" charset="utf-8"></script>
+<meta name="data-rel-prefix" content="../../../">
+<meta name="data-tree-keys" content='["AnkiRecord", "Helpers", "AnkiGuidHelper"]'>
+
+
+    <meta property="og:title" value="AnkiRecord::Helpers::AnkiGuidHelper">
+
+  
+    
+    <meta name="description" content="A module for the method that computes the guid value of notes.  This guid is used by Anki when importing a deck package to update existing notes rather than create duplicates of them.">
+    <meta property="og:description" content="A module for the method that computes the guid value of notes.  This guid is used by Anki when importing a deck package to update existing notes rather than create duplicates of them.">
+  
+
+    <meta name="keywords" content="AnkiRecord::Helpers::AnkiGuidHelper class, globally_unique_id">
+</head>
+
+<body>
+    <a class="sr-only sr-only-focusable" href="#content" data-turbolinks="false">Skip to Content</a>
+    <a class="sr-only sr-only-focusable" href="#search" data-turbolinks="false">Skip to Search</a>
+
+    <input type="checkbox" id="hamburger" class="panel_checkbox">
+<label class="panel_mobile_button" for="hamburger"><span></span> Menu</label>
+<nav class="panel panel_tree" id="panel" data-turbolinks-permanent>
+  <div class="header">
+    <input type="text" placeholder="Search (/) for a class, method, ..." autosave="searchdoc" results="10" id="search" autocomplete="off" tabindex="-1" />
+    <label class="panel_mobile_button_close" for="hamburger"><span></span> Close</label>
+  </div>
+  <div class="tree">
+    <ul>
+    </ul>
+  </div>
+  <div class="result">
+    <ul>
+    </ul>
+  </div>
+  <a href="links.html" id="links">index</a>
+</nav>
+
+
+    <div class="banner">
+        
+        <h2>
+            <span class="type">Module</span>
+            AnkiRecord::Helpers::AnkiGuidHelper
+            
+        </h2>
+        <ul class="files">
+            
+            <li><a href="../../../files/lib/anki_record/helpers/anki_guid_helper_rb.html">lib/anki_record/helpers/anki_guid_helper.rb</a></li>
+            
+        </ul>
+        
+    </div>
+
+    <main id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>A module for the method that computes the guid value of notes.</p>
+
+<p>This guid is used by Anki when importing a deck package to update existing notes rather than create duplicates of them.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-globally_unique_id">globally_unique_id</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <h2 class="sectiontitle">Class Public methods</h2>
+      
+        <div class="method">
+          <h3 class="title method-title" id="method-c-globally_unique_id">
+            
+              <b>globally_unique_id</b>()
+            
+            <a href="../../../classes/AnkiRecord/Helpers/AnkiGuidHelper.html#method-c-globally_unique_id" name="method-c-globally_unique_id" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns a random string of 10 characters sliced out of a random base64 string (RFC 3548).</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-globally_unique_id_source')" id="l_method-c-globally_unique_id_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-globally_unique_id_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/helpers/anki_guid_helper.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">globally_unique_id</span>
+  <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">base64</span>(<span class="ruby-value">9</span>).<span class="ruby-identifier">slice</span>(<span class="ruby-value">1</span>, <span class="ruby-value">10</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+    
+  
+</div>
+
+    </main>
+  </body>
+</html>

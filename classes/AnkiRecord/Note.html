@@ -24,8 +24,8 @@
 
   
     
-    <meta name="description" content="Represents an Anki note.">
-    <meta property="og:description" content="Represents an Anki note.">
+    <meta name="description" content="Note represents Anki notes, which are the main thing that Anki Record is intended to create or update.">
+    <meta property="og:description" content="Note represents Anki notes, which are the main thing that Anki Record is intended to create or update.">
   
 
     <meta name="keywords" content="AnkiRecord::Note class, new, save, method_missing, respond_to_missing?">
@@ -80,7 +80,7 @@
   
     <div class="description">
       
-<p>Represents an Anki note.</p>
+<p><a href="Note.html"><code>Note</code></a> represents Anki notes, which are the main thing that Anki Record is intended to create or update.</p>
 
     </div>
   
@@ -175,14 +175,6 @@
       
         <li>
           
-            <a href="NoteGuidHelper.html">
-              AnkiRecord::NoteGuidHelper
-            </a>
-          
-        </li>
-      
-        <li>
-          
             <a href="Helpers/TimeHelper.html">
               AnkiRecord::Helpers::TimeHelper
             </a>
@@ -213,14 +205,14 @@
         <div class="method">
           <h3 class="title method-title" id="method-c-new">
             
-              <b>new</b>(note_type: nil, deck: nil, collection: nil, data: nil)
+              <b>new</b>(note_type: nil, deck: nil, anki21_database: nil, data: nil)
             
             <a href="../../classes/AnkiRecord/Note.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </h3>
 
           
             <div class="description">
-              <p>Instantiates a note of type <code>note_type</code> and belonging to deck <code>deck</code>.</p>
+              <p>Instantiates a note of type <code>note_type</code> and belonging to deck <code>deck</code></p>
             </div>
           
 
@@ -244,13 +236,13 @@
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 23</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">note_type:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">deck:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">collection:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">data:</span> <span class="ruby-keyword">nil</span>)
+                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">note_type:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">deck:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">anki21_database:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">data:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">note_type</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">deck</span>
-    <span class="ruby-identifier">setup_instance_variables_for_new_note</span>(<span class="ruby-value">note_type:</span> <span class="ruby-identifier">note_type</span>, <span class="ruby-value">deck:</span> <span class="ruby-identifier">deck</span>)
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">collection</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>
-    <span class="ruby-identifier">setup_instance_variables_from_existing</span>(<span class="ruby-value">collection:</span> <span class="ruby-identifier">collection</span>,
-                                           <span class="ruby-value">note_data:</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:note_data</span>], <span class="ruby-value">cards_data:</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:cards_data</span>])
+    <span class="ruby-identifier">setup_new_note</span>(<span class="ruby-value">note_type:</span>, <span class="ruby-value">deck:</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">anki21_database</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>
+    <span class="ruby-identifier">setup_existing_note</span>(<span class="ruby-value">anki21_database:</span>,
+                        <span class="ruby-value">note_data:</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:note_data</span>], <span class="ruby-value">cards_data:</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:cards_data</span>])
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
   <span class="ruby-keyword">end</span>
@@ -274,9 +266,11 @@
 
           
             <div class="description">
-              <p>Overrides BasicObject#method_missing and creates “ghost methods”.</p>
+              <p>Overrides BasicObject#method_missing and creates “ghost methods”</p>
 
 <p>The ghost methods are the setters and getters for the note field values.</p>
+
+<p>For example, if the note type has a field called “front” then there will be two ghost methods: front and front=.</p>
             </div>
           
 
@@ -300,7 +294,7 @@
                 
               </p>
               <div id="method-i-method_missing_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 144</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">method_missing</span>(<span class="ruby-identifier">method_name</span>, <span class="ruby-identifier">field_content</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoMethodError</span>, <span class="ruby-node">&quot;##{method_name} is not defined or a ghost method&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">respond_to_missing?</span> <span class="ruby-identifier">method_name</span>
 
@@ -348,7 +342,7 @@
                 
               </p>
               <div id="method-i-respond_to_missing-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 155</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">respond_to_missing?</span>(<span class="ruby-identifier">method_name</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-identifier">method_name</span> = <span class="ruby-identifier">method_name</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">method_name</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&quot;=&quot;</span>)
@@ -372,9 +366,7 @@
 
           
             <div class="description">
-              <p>Saves the note to the collection.anki21 database.</p>
-
-<p>This also saves the note’s cards.</p>
+              <p>Saves the note and its cards</p>
             </div>
           
 
@@ -398,9 +390,9 @@
                 
               </p>
               <div id="method-i-save_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 109</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>
-  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">find_note_by</span>(<span class="ruby-value">id:</span> <span class="ruby-ivar">@id</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">update_note_in_collection_anki21</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">insert_new_note_in_collection_anki21</span>
+  <span class="ruby-identifier">anki21_database</span>.<span class="ruby-identifier">find_note_by</span>(<span class="ruby-value">id:</span> <span class="ruby-ivar">@id</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">update_note_in_collection_anki21</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">insert_new_note_in_collection_anki21</span>
   <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
               </div>

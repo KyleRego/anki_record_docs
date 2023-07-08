@@ -74,7 +74,7 @@
   
     <div class="description">
       
-<p>Module with the <a href="NoteType.html"><code>NoteType</code></a> class’s attribute readers, writers, and accessors.</p>
+<p>Module with the <a href="NoteType.html"><code>NoteType</code></a> class’s attribute readers, writers, and accessors</p>
 
     </div>
   
@@ -137,8 +137,16 @@
             <td class='attr-rw'>
               [R]
             </td>
+            <td class='attr-name'>anki21_database</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
             <td class='attr-name'>card_templates</td>
-            <td class='attr-desc'><p>The note type’s card template objects, as an array.</p></td>
+            <td class='attr-desc'><p>The note type’s card template objects, as an array</p></td>
           </tr>
         
           <tr valign='top'>
@@ -146,15 +154,7 @@
               [RW]
             </td>
             <td class='attr-name'>cloze</td>
-            <td class='attr-desc'><p>A boolean that indicates if this note type is a cloze-deletion note type.</p></td>
-          </tr>
-        
-          <tr valign='top'>
-            <td class='attr-rw'>
-              [R]
-            </td>
-            <td class='attr-name'>collection</td>
-            <td class='attr-desc'><p>The note type’s collection object.</p></td>
+            <td class='attr-desc'><p>A boolean that indicates if this note type is a cloze-deletion note type</p></td>
           </tr>
         
           <tr valign='top'>
@@ -162,7 +162,7 @@
               [RW]
             </td>
             <td class='attr-name'>css</td>
-            <td class='attr-desc'><p>The note type’s CSS.</p></td>
+            <td class='attr-desc'><p>The note type’s CSS</p></td>
           </tr>
         
           <tr valign='top'>
@@ -170,7 +170,7 @@
               [R]
             </td>
             <td class='attr-name'>deck_id</td>
-            <td class='attr-desc'><p>The note type’s deck’s id.</p></td>
+            <td class='attr-desc'><p>The note type’s deck’s id</p></td>
           </tr>
         
           <tr valign='top'>
@@ -178,7 +178,7 @@
               [R]
             </td>
             <td class='attr-name'>id</td>
-            <td class='attr-desc'><p>The note type’s id.</p></td>
+            <td class='attr-desc'><p>The note type’s id</p></td>
           </tr>
         
           <tr valign='top'>
@@ -186,7 +186,7 @@
               [R]
             </td>
             <td class='attr-name'>last_modified_timestamp</td>
-            <td class='attr-desc'><p>The number of seconds since the 1970 epoch at which the note type was last modified.</p></td>
+            <td class='attr-desc'><p>The number of seconds since the 1970 epoch at which the note type was last modified</p></td>
           </tr>
         
           <tr valign='top'>
@@ -194,7 +194,7 @@
               [R]
             </td>
             <td class='attr-name'>latex_postamble</td>
-            <td class='attr-desc'><p>The note type’s LaTeX postamble.</p></td>
+            <td class='attr-desc'><p>The note type’s LaTeX postamble</p></td>
           </tr>
         
           <tr valign='top'>
@@ -202,7 +202,7 @@
               [R]
             </td>
             <td class='attr-name'>latex_preamble</td>
-            <td class='attr-desc'><p>The note type’s LaTeX preamble.</p></td>
+            <td class='attr-desc'><p>The note type’s LaTeX preamble</p></td>
           </tr>
         
           <tr valign='top'>
@@ -218,7 +218,7 @@
               [RW]
             </td>
             <td class='attr-name'>name</td>
-            <td class='attr-desc'><p>The note type’s name.</p></td>
+            <td class='attr-desc'><p>The note type’s name</p></td>
           </tr>
         
           <tr valign='top'>
@@ -226,7 +226,7 @@
               [R]
             </td>
             <td class='attr-name'>note_fields</td>
-            <td class='attr-desc'><p>The note type’s field objects, as an array.</p></td>
+            <td class='attr-desc'><p>The note type’s field objects, as an array</p></td>
           </tr>
         
           <tr valign='top'>
@@ -242,7 +242,7 @@
               [R]
             </td>
             <td class='attr-name'>sort_field</td>
-            <td class='attr-desc'><p>The note type’s sort field.</p></td>
+            <td class='attr-desc'><p>The note type’s sort field</p></td>
           </tr>
         
           <tr valign='top'>
@@ -258,7 +258,7 @@
               [R]
             </td>
             <td class='attr-name'>usn</td>
-            <td class='attr-desc'><p>The note type’s update sequence number.</p></td>
+            <td class='attr-desc'><p>The note type’s update sequence number</p></td>
           </tr>
         
           <tr valign='top'>
@@ -288,7 +288,7 @@
 
           
             <div class="description">
-              <p>The note type’s deck.</p>
+              <p>The note type’s deck</p>
             </div>
           
 
@@ -312,11 +312,11 @@
                 
               </p>
               <div id="method-i-deck_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type_attributes.rb, line 61</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type_attributes.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deck</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@deck_id</span>
 
-  <span class="ruby-ivar">@collection</span>.<span class="ruby-identifier">find_deck_by</span> <span class="ruby-value">id:</span> <span class="ruby-ivar">@deck_id</span>
+  <span class="ruby-identifier">anki21_database</span>.<span class="ruby-identifier">find_deck_by</span> <span class="ruby-value">id:</span> <span class="ruby-ivar">@deck_id</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -333,7 +333,7 @@
 
           
             <div class="description">
-              <p>Sets the note type’s deck object.</p>
+              <p>Sets the note type’s deck object</p>
             </div>
           
 
@@ -357,7 +357,7 @@
                 
               </p>
               <div id="method-i-deck-3D_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type_attributes.rb, line 69</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/note_type/note_type_attributes.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deck=</span>(<span class="ruby-identifier">deck</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">deck</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Deck</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,

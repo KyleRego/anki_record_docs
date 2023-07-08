@@ -24,11 +24,11 @@
 
   
     
-    <meta name="description" content="AnkiPackage represents an Anki package deck file.">
-    <meta property="og:description" content="AnkiPackage represents an Anki package deck file.">
+    <meta name="description" content="AnkiPackage represents the Anki deck package file which has the .apkg file extension  This is a zip file containing two SQLite databases (collection.anki21 and collection.">
+    <meta property="og:description" content="AnkiPackage represents the Anki deck package file which has the .apkg file extension  This is a zip file containing two SQLite databases (collection.anki21 and collection.">
   
 
-    <meta name="keywords" content="AnkiRecord::AnkiPackage class, new, prepare, open">
+    <meta name="keywords" content="AnkiRecord::AnkiPackage class, create, update">
 </head>
 
 <body>
@@ -80,7 +80,9 @@
   
     <div class="description">
       
-<p><a href="AnkiPackage.html"><code>AnkiPackage</code></a> represents an Anki package deck file.</p>
+<p><a href="AnkiPackage.html"><code>AnkiPackage</code></a> represents the Anki deck package file which has the .apkg file extension</p>
+
+<p>This is a zip file containing two SQLite databases (collection.anki21 and collection.anki2), a media file, and possibly the media (images and sound files). The gem currently does not have any support for adding or changing media in the Anki package.</p>
 
     </div>
   
@@ -101,37 +103,25 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
-        <dt>N</dt>
+        <dt>C</dt>
         <dd>
           <ul>
             
               
               <li>
-                <a href="#method-c-new">new</a>
+                <a href="#method-c-create">create</a>
               </li>
             
           </ul>
         </dd>
       
-        <dt>O</dt>
+        <dt>U</dt>
         <dd>
           <ul>
             
               
               <li>
-                <a href="#method-c-open">open</a>
-              </li>
-            
-          </ul>
-        </dd>
-      
-        <dt>P</dt>
-        <dd>
-          <ul>
-            
-              
-              <li>
-                <a href="#method-i-prepare">prepare</a>
+                <a href="#method-c-update">update</a>
               </li>
             
           </ul>
@@ -154,20 +144,6 @@
 
 
     
-      <!-- Section attributes -->
-      <h2 class="sectiontitle">Attributes</h2>
-      <table border='0' cellpadding='5'>
-        
-          <tr valign='top'>
-            <td class='attr-rw'>
-              [R]
-            </td>
-            <td class='attr-name'>collection</td>
-            <td class='attr-desc'><p>The package’s collection object.</p></td>
-          </tr>
-        
-      </table>
-    
 
 
     <!-- Methods -->
@@ -175,18 +151,16 @@
       <h2 class="sectiontitle">Class Public methods</h2>
       
         <div class="method">
-          <h3 class="title method-title" id="method-c-new">
+          <h3 class="title method-title" id="method-c-create">
             
-              <b>new</b>(name:, target_directory: Dir.pwd, data: nil, open_path: nil, &amp;closure)
+              <b>create</b>(name:, target_directory: Dir.pwd, &amp;closure)
             
-            <a href="../../classes/AnkiRecord/AnkiPackage.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+            <a href="../../classes/AnkiRecord/AnkiPackage.html#method-c-create" name="method-c-create" class="permalink">Link</a>
           </h3>
 
           
             <div class="description">
-              <p>Instantiates a new Anki package object.</p>
-
-<p>See the <a href="../../files/README_md.html">README</a> for usage details.</p>
+              <p>Creates a new Anki package file (see the <a href="../../files/README_md.html">README</a>)</p>
             </div>
           
 
@@ -202,25 +176,19 @@
                  Source: 
 
                 
-                  <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                  <a href="javascript:toggleSource('method-c-create_source')" id="l_method-c-create_source">show</a>
                 
 
                 
 
                 
               </p>
-              <div id="method-c-new_source" class="dyn-source">
+              <div id="method-c-create_source" class="dyn-source">
                 <pre><span class="ruby-comment"># File lib/anki_record/anki_package/anki_package.rb, line 25</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">name:</span>, <span class="ruby-value">target_directory:</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>, <span class="ruby-value">data:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">open_path:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">closure</span>)
-  <span class="ruby-identifier">check_name_argument_is_valid</span>(<span class="ruby-value">name:</span>)
-  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&quot;.apkg&quot;</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">name</span>[<span class="ruby-value">0</span>, <span class="ruby-identifier">name</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">5</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">name</span>
-  <span class="ruby-ivar">@target_directory</span> = <span class="ruby-identifier">target_directory</span>
-  <span class="ruby-ivar">@open_path</span> = <span class="ruby-identifier">open_path</span>
-  <span class="ruby-identifier">check_directory_argument_is_valid</span>
-  <span class="ruby-identifier">setup_other_package_instance_variables</span>
-  <span class="ruby-identifier">insert_existing_data</span>(<span class="ruby-value">data:</span> <span class="ruby-identifier">data</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>
-
-  <span class="ruby-identifier">execute_closure_and_zip</span>(<span class="ruby-identifier">collection</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">closure</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">create</span>(<span class="ruby-value">name:</span>, <span class="ruby-value">target_directory:</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">closure</span>)
+  <span class="ruby-identifier">anki_package</span> = <span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">anki_package</span>.<span class="ruby-identifier">create_initialize</span>(<span class="ruby-value">name:</span>, <span class="ruby-value">target_directory:</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">closure</span>)
+  <span class="ruby-identifier">anki_package</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -228,18 +196,16 @@
           </div>
         
         <div class="method">
-          <h3 class="title method-title" id="method-c-open">
+          <h3 class="title method-title" id="method-c-update">
             
-              <b>open</b>(path:, target_directory: nil, &amp;closure)
+              <b>update</b>(path:, &amp;closure)
             
-            <a href="../../classes/AnkiRecord/AnkiPackage.html#method-c-open" name="method-c-open" class="permalink">Link</a>
+            <a href="../../classes/AnkiRecord/AnkiPackage.html#method-c-update" name="method-c-update" class="permalink">Link</a>
           </h3>
 
           
             <div class="description">
-              <p>Instantiates a new Anki package object seeded with data from the opened Anki package.</p>
-
-<p>See the <a href="../../files/README_md.html">README</a> for details.</p>
+              <p>Opens an existing Anki package file to update its contents (see the <a href="../../files/README_md.html">README</a>)</p>
             </div>
           
 
@@ -255,28 +221,19 @@
                  Source: 
 
                 
-                  <a href="javascript:toggleSource('method-c-open_source')" id="l_method-c-open_source">show</a>
+                  <a href="javascript:toggleSource('method-c-update_source')" id="l_method-c-update_source">show</a>
                 
 
                 
 
                 
               </p>
-              <div id="method-c-open_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/anki_package/anki_package.rb, line 132</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open</span>(<span class="ruby-value">path:</span>, <span class="ruby-value">target_directory:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">closure</span>)
-  <span class="ruby-identifier">pathname</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>)
-  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;*No .apkg file was found at the given path.&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">pathname</span>.<span class="ruby-identifier">file?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">pathname</span>.<span class="ruby-identifier">extname</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;.apkg&quot;</span>
-
-  <span class="ruby-identifier">new_apkg_name</span> = <span class="ruby-node">&quot;#{File.basename(pathname.to_s, &quot;.apkg&quot;)}-#{seconds_since_epoch}&quot;</span>
-  <span class="ruby-identifier">data</span> = <span class="ruby-identifier">col_record_and_note_ids_to_copy_over</span>(<span class="ruby-value">pathname:</span> <span class="ruby-identifier">pathname</span>)
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">target_directory</span>
-    <span class="ruby-identifier">new</span>(<span class="ruby-value">name:</span> <span class="ruby-identifier">new_apkg_name</span>, <span class="ruby-value">data:</span> <span class="ruby-identifier">data</span>, <span class="ruby-value">open_path:</span> <span class="ruby-identifier">pathname</span>,
-        <span class="ruby-value">target_directory:</span> <span class="ruby-identifier">target_directory</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">closure</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">new</span>(<span class="ruby-value">name:</span> <span class="ruby-identifier">new_apkg_name</span>, <span class="ruby-value">data:</span> <span class="ruby-identifier">data</span>, <span class="ruby-value">open_path:</span> <span class="ruby-identifier">pathname</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">closure</span>)
-  <span class="ruby-keyword">end</span>
+              <div id="method-c-update_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/anki_package/anki_package.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">update</span>(<span class="ruby-value">path:</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">closure</span>)
+  <span class="ruby-identifier">anki_package</span> = <span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">anki_package</span>.<span class="ruby-identifier">update_initialize</span>(<span class="ruby-value">path:</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">closure</span>)
+  <span class="ruby-identifier">anki_package</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -285,54 +242,6 @@
         
       
     
-      <h2 class="sectiontitle">Instance Public methods</h2>
-      
-        <div class="method">
-          <h3 class="title method-title" id="method-i-prepare">
-            
-              <b>prepare</b>(sql)
-            
-            <a href="../../classes/AnkiRecord/AnkiPackage.html#method-i-prepare" name="method-i-prepare" class="permalink">Link</a>
-          </h3>
-
-          
-            <div class="description">
-              <p>Returns an SQLite3::Statement object representing the given SQL and coupled to the collection.anki21 database.</p>
-
-<p>The Statement is executed using Statement#execute (see sqlite3 gem).</p>
-            </div>
-          
-
-          
-
-          
-
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                 Source: 
-
-                
-                  <a href="javascript:toggleSource('method-i-prepare_source')" id="l_method-i-prepare_source">show</a>
-                
-
-                
-
-                
-              </p>
-              <div id="method-i-prepare_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/anki_package/anki_package.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">prepare</span>(<span class="ruby-identifier">sql</span>)
-  <span class="ruby-ivar">@anki21_database</span>.<span class="ruby-identifier">prepare</span> <span class="ruby-identifier">sql</span>
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-        
-      
     
   
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>AnkiRecord::NoteFieldAttributes</title>
+    <title>AnkiRecord::Anki21DatabaseAttributes</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
@@ -17,18 +17,18 @@
 <script src="../../panel/tree.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/searchdoc.js" type="text/javascript" charset="utf-8"></script>
 <meta name="data-rel-prefix" content="../../">
-<meta name="data-tree-keys" content='["AnkiRecord", "NoteFieldAttributes"]'>
+<meta name="data-tree-keys" content='["AnkiRecord", "Anki21DatabaseAttributes"]'>
 
 
-    <meta property="og:title" value="AnkiRecord::NoteFieldAttributes">
+    <meta property="og:title" value="AnkiRecord::Anki21DatabaseAttributes">
 
   
     
-    <meta name="description" content="Module with NoteField class’s attribute readers, writers, and accessors.">
-    <meta property="og:description" content="Module with NoteField class’s attribute readers, writers, and accessors.">
+    <meta name="description" content="Module with Anki21Database’s attribute readers, writers, and accessors.">
+    <meta property="og:description" content="Module with Anki21Database’s attribute readers, writers, and accessors.">
   
 
-    <meta name="keywords" content="AnkiRecord::NoteFieldAttributes class, ">
+    <meta name="keywords" content="AnkiRecord::Anki21DatabaseAttributes class, ">
 </head>
 
 <body>
@@ -58,12 +58,12 @@
         
         <h2>
             <span class="type">Module</span>
-            AnkiRecord::NoteFieldAttributes
+            AnkiRecord::Anki21DatabaseAttributes
             
         </h2>
         <ul class="files">
             
-            <li><a href="../../files/lib/anki_record/note_field/note_field_attributes_rb.html">lib/anki_record/note_field/note_field_attributes.rb</a></li>
+            <li><a href="../../files/lib/anki_record/anki21_database/anki21_database_attributes_rb.html">lib/anki_record/anki21_database/anki21_database_attributes.rb</a></li>
             
         </ul>
         
@@ -74,7 +74,7 @@
   
     <div class="description">
       
-<p>Module with <a href="NoteField.html"><code>NoteField</code></a> class’s attribute readers, writers, and accessors.</p>
+<p>Module with Anki21Database’s attribute readers, writers, and accessors</p>
 
     </div>
   
@@ -112,66 +112,50 @@
         
           <tr valign='top'>
             <td class='attr-rw'>
-              [RW]
+              [R]
             </td>
-            <td class='attr-name'>description</td>
-            <td class='attr-desc'><p>The field’s description</p></td>
-          </tr>
-        
-          <tr valign='top'>
-            <td class='attr-rw'>
-              [RW]
-            </td>
-            <td class='attr-name'>font_size</td>
-            <td class='attr-desc'><p>The field’s font size used when editing</p></td>
-          </tr>
-        
-          <tr valign='top'>
-            <td class='attr-rw'>
-              [RW]
-            </td>
-            <td class='attr-name'>font_style</td>
-            <td class='attr-desc'><p>The field’s font style used when editing</p></td>
-          </tr>
-        
-          <tr valign='top'>
-            <td class='attr-rw'>
-              [RW]
-            </td>
-            <td class='attr-name'>name</td>
-            <td class='attr-desc'><p>The field’s name</p></td>
+            <td class='attr-name'>anki_package</td>
+            <td class='attr-desc'><p>The database’s parent Anki package</p></td>
           </tr>
         
           <tr valign='top'>
             <td class='attr-rw'>
               [R]
             </td>
-            <td class='attr-name'>note_type</td>
-            <td class='attr-desc'><p>The field’s note type</p></td>
+            <td class='attr-name'>collection</td>
+            <td class='attr-desc'><p>The database’s collection record</p></td>
           </tr>
         
           <tr valign='top'>
             <td class='attr-rw'>
               [R]
             </td>
-            <td class='attr-name'>ordinal_number</td>
-            <td class='attr-desc'><p>0 for the first field of the note type, 1 for the second, etc</p></td>
+            <td class='attr-name'>database</td>
+            <td class='attr-desc'><p>The database’s collection.anki21 SQLite3::Database</p></td>
           </tr>
         
           <tr valign='top'>
             <td class='attr-rw'>
-              [RW]
+              [R]
             </td>
-            <td class='attr-name'>right_to_left</td>
-            <td class='attr-desc'><p>A boolean that indicates if the field is right to left</p></td>
+            <td class='attr-name'>deck_options_groups</td>
+            <td class='attr-desc'><p>The database’s deck option groups as an array</p></td>
           </tr>
         
           <tr valign='top'>
             <td class='attr-rw'>
-              [RW]
+              [R]
             </td>
-            <td class='attr-name'>sticky</td>
-            <td class='attr-desc'><p>A boolean that indicates if the field is sticky</p></td>
+            <td class='attr-name'>decks</td>
+            <td class='attr-desc'><p>The database’s decks as an array</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>note_types</td>
+            <td class='attr-desc'><p>The database’s note types as an array</p></td>
           </tr>
         
       </table>

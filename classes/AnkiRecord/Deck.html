@@ -173,14 +173,14 @@
         <div class="method">
           <h3 class="title method-title" id="method-c-new">
             
-              <b>new</b>(collection:, name: nil, args: nil)
+              <b>new</b>(anki21_database:, name: nil, args: nil)
             
             <a href="../../classes/AnkiRecord/Deck.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </h3>
 
           
             <div class="description">
-              <p>Instantiates a new <a href="Deck.html"><code>Deck</code></a> object belonging to <code>collection</code> with name <code>name</code>.</p>
+              <p>Instantiates a new <a href="Deck.html"><code>Deck</code></a> object belonging to <code>anki21_database</code> with name <code>name</code>.</p>
             </div>
           
 
@@ -205,17 +205,17 @@
               </p>
               <div id="method-c-new_source" class="dyn-source">
                 <pre><span class="ruby-comment"># File lib/anki_record/deck/deck.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">collection:</span>, <span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">args:</span> <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">anki21_database:</span>, <span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">args:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">name</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">args</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>[<span class="ruby-string">&quot;name&quot;</span>])
 
-  <span class="ruby-ivar">@collection</span> = <span class="ruby-identifier">collection</span>
+  <span class="ruby-ivar">@anki21_database</span> = <span class="ruby-identifier">anki21_database</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>
-    <span class="ruby-identifier">setup_deck_instance_variables_from_existing</span>(<span class="ruby-value">args:</span> <span class="ruby-identifier">args</span>)
+    <span class="ruby-identifier">setup_deck_instance_variables_from_existing</span>(<span class="ruby-value">args:</span>)
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">setup_deck_instance_variables</span>(<span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>)
+    <span class="ruby-identifier">setup_deck_instance_variables</span>(<span class="ruby-value">name:</span>)
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-ivar">@collection</span>.<span class="ruby-identifier">add_deck</span> <span class="ruby-keyword">self</span>
+  <span class="ruby-ivar">@anki21_database</span>.<span class="ruby-identifier">add_deck</span> <span class="ruby-keyword">self</span>
   <span class="ruby-identifier">save</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
@@ -263,10 +263,10 @@
               <div id="method-i-save_source" class="dyn-source">
                 <pre><span class="ruby-comment"># File lib/anki_record/deck/deck.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>
-  <span class="ruby-identifier">collection_decks_hash</span> = <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">decks_json</span>
+  <span class="ruby-identifier">collection_decks_hash</span> = <span class="ruby-identifier">anki21_database</span>.<span class="ruby-identifier">decks_json</span>
   <span class="ruby-identifier">collection_decks_hash</span>[<span class="ruby-ivar">@id</span>] = <span class="ruby-identifier">to_h</span>
   <span class="ruby-identifier">sql</span> = <span class="ruby-string">&quot;update col set decks = ? where id = ?&quot;</span>
-  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">anki_package</span>.<span class="ruby-identifier">prepare</span>(<span class="ruby-identifier">sql</span>).<span class="ruby-identifier">execute</span>([<span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-identifier">collection_decks_hash</span>), <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">id</span>])
+  <span class="ruby-identifier">anki21_database</span>.<span class="ruby-identifier">prepare</span>(<span class="ruby-identifier">sql</span>).<span class="ruby-identifier">execute</span>([<span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-identifier">collection_decks_hash</span>), <span class="ruby-identifier">anki21_database</span>.<span class="ruby-identifier">collection</span>.<span class="ruby-identifier">id</span>])
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
