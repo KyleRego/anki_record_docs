@@ -55,7 +55,7 @@
                 README.md
                 
             </li>
-            <li>Last modified: 2023-07-08 15:41:48 -0400</li>
+            <li>Last modified: 2023-08-20 10:18:31 -0400</li>
         </ul>
         
     </div>
@@ -83,7 +83,7 @@
 
 <h2 id="label-Usage">Usage</h2>
 
-<p>This example shows how to create a new Anki package and also most of the features of the gem:</p>
+<p>This example shows how to create a new Anki package and most of the API:</p>
 
 <pre><code>require &quot;anki_record&quot;
 
@@ -119,30 +119,30 @@ AnkiRecord::AnkiPackage.create(name: &quot;example&quot;) do |anki21_database|
   custom_note_type.css = css
   custom_note_type.save
 
-  # Creating a note with the custom note type
+  # Creating a new note with the custom note type
   note = AnkiRecord::Note.new(note_type: custom_note_type, deck: custom_deck)
   note.custom_front = &quot;Content of the &#39;custom front&#39; field&quot;
   note.custom_back = &quot;Content of the &#39;custom back&#39; field&quot;
   note.save
 
-  # The default deck
+  # Finding the default deck
   default_deck = anki21_database.find_deck_by(name: &quot;Default&quot;)
 
-  # All of the default Anki note types
+  # Finding all of the default Anki note types
   basic_note_type = anki21_database.find_note_type_by(name: &quot;Basic&quot;)
   basic_and_reversed_card_note_type = anki21_database.find_note_type_by(name: &quot;Basic (and reversed card)&quot;)
   basic_and_optional_reversed_card_note_type = anki21_database.find_note_type_by(name: &quot;Basic (optional reversed card)&quot;)
   basic_type_in_the_answer_note_type = anki21_database.find_note_type_by(name: &quot;Basic (type in the answer)&quot;)
   cloze_note_type = anki21_database.find_note_type_by(name: &quot;Cloze&quot;)
 
-  # Creating notes using the default note types
+  # Creating new notes using the default note types
 
   basic_note = AnkiRecord::Note.new(note_type: basic_note_type, deck: default_deck)
   basic_note.front = &quot;What molecule is most relevant to the name aerobic exercise?&quot;
   basic_note.back = &quot;Oxygen&quot;
   basic_note.save
 
-  # Creating a nested deck
+  # Creating a new nested deck
   amino_acids_deck = AnkiRecord::Deck.new(anki21_database:,
                                           name: &quot;Biochemistry::Amino acids&quot;)
   amino_acids_deck.save
@@ -171,8 +171,8 @@ AnkiRecord::AnkiPackage.create(name: &quot;example&quot;) do |anki21_database|
   cloze_note.back_extra = &quot;This condition involves one cranial nerve but can have myriad neurological symptoms&quot;
   cloze_note.save
 end
-# The example.apkg package now exists in the current
-# working directory and contains 6 notes.
+# An example.apkg file should be in the current
+# working directory with 6 notes.
 </code></pre>
 
 <p><code>AnkiRecord::AnkiPackage.new</code> can also take a <code>target_directory</code> keyword argument to specify the directory to save the Anki package. If an error is thrown inside the block argument, temporary files that exist during execution of the block (Anki SQLite databases and the file called <code>media</code>) are deleted and no new Anki package is created.</p>
@@ -193,7 +193,7 @@ end
 
 <h2 id="label-Documentation">Documentation</h2>
 
-<p>The <a href="https://kylerego.github.io/anki_record_docs">API Documentation</a> is generated from comments in the source code could be useful if the above examples are not sufficient for your use case.</p>
+<p>The <a href="https://kylerego.github.io/anki_record_docs">API Documentation</a> generated from source code comments might be useful but I think the examples above show everything you can do that you would want to do.</p>
 
 <h2 id="label-Development">Development</h2>
 

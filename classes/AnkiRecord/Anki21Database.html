@@ -28,7 +28,7 @@
     <meta property="og:description" content="Anki21Database represents the collection.">
   
 
-    <meta name="keywords" content="AnkiRecord::Anki21Database class, prepare, find_note_by, find_note_type_by, find_deck_by, find_deck_options_group_by">
+    <meta name="keywords" content="AnkiRecord::Anki21Database class, prepare, find_note_by, find_notes_by_exact_text_match, find_note_type_by, find_deck_by, find_deck_options_group_by">
 </head>
 
 <body>
@@ -124,7 +124,12 @@
             
               
               <li>
-                <a href="#method-i-find_note_type_by">find_note_type_by</a>
+                <a href="#method-i-find_note_type_by">find_note_type_by</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_notes_by_exact_text_match">find_notes_by_exact_text_match</a>
               </li>
             
           </ul>
@@ -214,11 +219,11 @@
                 
               </p>
               <div id="method-i-find_deck_by_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/anki21_database/anki21_database.rb, line 55</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/anki21_database/anki21_database.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_deck_by</span>(<span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">id:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> (<span class="ruby-identifier">id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">name</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,
-          <span class="ruby-string">&quot;You must pass either an id or name keyword argument.&quot;</span>
+          <span class="ruby-string">&quot;You must pass either an id or name keyword argument to find_deck_by.&quot;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">name</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">find_deck_by_name</span>(<span class="ruby-value">name:</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">find_deck_by_id</span>(<span class="ruby-value">id:</span>)
@@ -262,7 +267,7 @@
                 
               </p>
               <div id="method-i-find_deck_options_group_by_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/anki21_database/anki21_database.rb, line 66</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/anki21_database/anki21_database.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_deck_options_group_by</span>(<span class="ruby-value">id:</span>)
   <span class="ruby-identifier">deck_options_groups</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">deck_options_group</span><span class="ruby-operator">|</span> <span class="ruby-identifier">deck_options_group</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">id</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -274,14 +279,16 @@
         <div class="method">
           <h3 class="title method-title" id="method-i-find_note_by">
             
-              <b>find_note_by</b>(id:)
+              <b>find_note_by</b>(sfld: nil, id: nil)
             
             <a href="../../classes/AnkiRecord/Anki21Database.html#method-i-find_note_by" name="method-i-find_note_by" class="permalink">Link</a>
           </h3>
 
           
             <div class="description">
-              <p>Returns the note found by <code>id</code>, or nil if it is not found.</p>
+              <p>rubocop:disable Metrics/MethodLength</p>
+
+<p>Returns the note found by either +sfld“ or <code>id</code>, or nil if it is not found.</p>
             </div>
           
 
@@ -305,9 +312,17 @@
                 
               </p>
               <div id="method-i-find_note_by_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/anki21_database/anki21_database.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_note_by</span>(<span class="ruby-value">id:</span>)
-  <span class="ruby-identifier">note_cards_data</span> = <span class="ruby-identifier">note_cards_data_for_note_id</span>(<span class="ruby-value">id:</span>)
+                <pre><span class="ruby-comment"># File lib/anki_record/anki21_database/anki21_database.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_note_by</span>(<span class="ruby-value">sfld:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">id:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">sfld</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">sfld</span>.<span class="ruby-identifier">nil?</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,
+          <span class="ruby-string">&quot;You must pass either an id or sfld keyword argument to find_note_by.&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">note_cards_data</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">id</span>
+                      <span class="ruby-identifier">note_cards_data_for_note</span>(<span class="ruby-value">id:</span>)
+                    <span class="ruby-keyword">else</span>
+                      <span class="ruby-identifier">note_cards_data_for_note</span>(<span class="ruby-value">sfld:</span>)
+                    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">note_cards_data</span>
 
   <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Note</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">anki21_database:</span> <span class="ruby-keyword">self</span>, <span class="ruby-value">data:</span> <span class="ruby-identifier">note_cards_data</span>)
@@ -351,14 +366,69 @@
                 
               </p>
               <div id="method-i-find_note_type_by_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/anki_record/anki21_database/anki21_database.rb, line 44</span>
+                <pre><span class="ruby-comment"># File lib/anki_record/anki21_database/anki21_database.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_note_type_by</span>(<span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">id:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> (<span class="ruby-identifier">id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">name</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,
-          <span class="ruby-string">&quot;You must pass either an id or name keyword argument.&quot;</span>
+          <span class="ruby-string">&quot;You must pass either an id or name keyword argument to find_note_type_by.&quot;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">name</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">find_note_type_by_name</span>(<span class="ruby-value">name:</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">find_note_type_by_id</span>(<span class="ruby-value">id:</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-find_notes_by_exact_text_match">
+            
+              <b>find_notes_by_exact_text_match</b>(text:)
+            
+            <a href="../../classes/AnkiRecord/Anki21Database.html#method-i-find_notes_by_exact_text_match" name="method-i-find_notes_by_exact_text_match" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns an array of notes that have any field value matching <code>text</code></p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-find_notes_by_exact_text_match_source')" id="l_method-i-find_notes_by_exact_text_match_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-find_notes_by_exact_text_match_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/anki21_database/anki21_database.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_notes_by_exact_text_match</span>(<span class="ruby-value">text:</span>)
+  <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">if</span> <span class="ruby-identifier">text</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
+
+  <span class="ruby-identifier">like_matcher</span> = <span class="ruby-node">&quot;%#{text}%&quot;</span>
+  <span class="ruby-identifier">note_datas</span> = <span class="ruby-identifier">prepare</span>(<span class="ruby-string">&quot;select * from notes where flds LIKE ?&quot;</span>).<span class="ruby-identifier">execute</span>([<span class="ruby-identifier">like_matcher</span>])
+
+  <span class="ruby-identifier">note_datas</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">note_data</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">id</span> = <span class="ruby-identifier">note_data</span>[<span class="ruby-string">&quot;id&quot;</span>]
+
+    <span class="ruby-identifier">cards_data</span> = <span class="ruby-identifier">prepare</span>(<span class="ruby-string">&quot;select * from cards where nid = ?&quot;</span>).<span class="ruby-identifier">execute</span>([<span class="ruby-identifier">id</span>]).<span class="ruby-identifier">to_a</span>
+    <span class="ruby-identifier">note_cards_data</span> = { <span class="ruby-value">note_data:</span>, <span class="ruby-value">cards_data:</span> }
+
+    <span class="ruby-constant">AnkiRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Note</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">anki21_database:</span> <span class="ruby-keyword">self</span>, <span class="ruby-value">data:</span> <span class="ruby-identifier">note_cards_data</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>

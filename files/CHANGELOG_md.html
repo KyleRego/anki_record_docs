@@ -55,7 +55,7 @@
                 CHANGELOG.md
                 
             </li>
-            <li>Last modified: 2023-07-08 14:55:58 -0400</li>
+            <li>Last modified: 2023-08-21 18:45:00 -0400</li>
         </ul>
         
     </div>
@@ -162,6 +162,17 @@
 <p>The <code>guid</code> attribute of notes ic computed in a different way that allows a larger number of possible values.</p>
 </li><li>
 <p><code>globally_unique_id</code> is now a module method rather than an included instance method.</p>
+</li></ul>
+
+<h2 id="label-5B0.4.1-5D+-+08-21-2023">[0.4.1] - 08-21-2023</h2>
+<ul><li>
+<p><code>Anki21Database#find_note_by</code> now can take the sort field value of a note as argument.</p>
+</li><li>
+<p><code>Anki21Database#find_notes_by_exact_text_match</code> is a new method that returns an array of notes that have in any field text matching the argument.</p>
+</li><li>
+<p>Trying to create an Anki package file with a path/name that already exists raises a more helpful error message.</p>
+</li><li>
+<p>Saving a note to the database saves the <code>mod</code> column (last modified time) to make it easier to import an updated package into Anki.</p>
 </li></ul>
 
     </div>

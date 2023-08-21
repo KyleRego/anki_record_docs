@@ -28,7 +28,7 @@
     <meta property="og:description" content="Note represents Anki notes, which are the main thing that Anki Record is intended to create or update.">
   
 
-    <meta name="keywords" content="AnkiRecord::Note class, new, save, method_missing, respond_to_missing?">
+    <meta name="keywords" content="AnkiRecord::Note class, new, save, method_missing, respond_to_missing?, sort_field_value">
 </head>
 
 <body>
@@ -143,7 +143,12 @@
             
               
               <li>
-                <a href="#method-i-save">save</a>
+                <a href="#method-i-save">save</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-sort_field_value">sort_field_value</a>
               </li>
             
           </ul>
@@ -394,6 +399,49 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>
   <span class="ruby-identifier">anki21_database</span>.<span class="ruby-identifier">find_note_by</span>(<span class="ruby-value">id:</span> <span class="ruby-ivar">@id</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">update_note_in_collection_anki21</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">insert_new_note_in_collection_anki21</span>
   <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-sort_field_value">
+            
+              <b>sort_field_value</b>()
+            
+            <a href="../../classes/AnkiRecord/Note.html#method-i-sort_field_value" name="method-i-sort_field_value" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Returns the text value of the note’s sfld (sort field) which is determined by the note’s note type</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-sort_field_value_source')" id="l_method-i-sort_field_value_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-sort_field_value_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/anki_record/note/note.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sort_field_value</span>
+  <span class="ruby-ivar">@field_contents</span>[<span class="ruby-identifier">note_type</span>.<span class="ruby-identifier">snake_case_sort_field_name</span>]
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
